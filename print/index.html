@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Reusable black-and-white worksheets for workplace learning, conversations and observations.">
+<title>Workplace Learning Worksheets</title>
+<style>
+* { box-sizing: border-box; }
+:root { color-scheme: light; font-family: Arial, Helvetica, sans-serif; color: #000; background: #fff; }
+body { margin: 0; font-size: 11pt; line-height: 1.3; }
+button, input { font: inherit; }
+button { background: #fff; color: #000; border: 1px solid #000; border-radius: 3px; padding: .45rem .7rem; cursor: pointer; }
+button:hover { text-decoration: underline; }
+button:disabled { color: #666; border-color: #999; cursor: default; }
+button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid #000; outline-offset: 3px; }
+a { color: #000; }
+.controls { max-width: 1050px; margin: 0 auto; padding: 1.5rem; }
+.controls h1 { font-size: 1.7rem; margin: 0 0 .5rem; }
+.controls p { max-width: 85ch; margin: .6rem 0; }
+.toolbar { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0; align-items: center; }
+fieldset { border: 1px solid #999; padding: .75rem; margin: 1rem 0; }
+legend { font-weight: bold; padding: 0 .3rem; }
+.choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .4rem 1rem; }
+.choice { display: flex; gap: .55rem; align-items: baseline; }
+.choice input { accent-color: #000; }
+#selection-status { font-weight: bold; }
+.screen-only[hidden] { display: none; }
+.sheet { width: 8.27in; height: 10.8in; margin: .3in auto; padding: .5in; border: 1px solid #aaa; display: flex; flex-direction: column; background: #fff; }
+.sheet.excluded { display: none; }
+.sheet-top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: 9pt; letter-spacing: .035em; }
+.sheet h2 { font-size: 18pt; line-height: 1.13; margin: .12in 0 .07in; }
+.intro { font-size: 10pt; margin: 0 0 .12in; }
+.record { font-size: 9.5pt; line-height: 1.9; border-bottom: .5pt solid #000; padding-bottom: .07in; }
+.record-row { display: flex; gap: .2in; }
+.record-row span { flex: 1; white-space: nowrap; }
+.questions { display: flex; flex-direction: column; flex: 1; min-height: 0; gap: .13in; padding-top: .15in; }
+.question { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+.question.large { flex: 2; }
+.question h3 { font-size: 11pt; line-height: 1.25; margin: 0 0 .035in; }
+.probes { font-size: 9.5pt; line-height: 1.25; margin: 0 0 .025in; }
+.benefit { font-size: 9pt; line-height: 1.2; margin: 0 0 .04in; }
+.writing { flex: 1; display: flex; flex-direction: column; min-height: .8in; }
+.writing span { flex: 1; min-height: .2in; border-bottom: .4pt solid #777; }
+.writing.diagram { border: .4pt solid #777; margin-top: .06in; }
+.writing.diagram span { border: 0; }
+.sheet-footer { font-size: 8.5pt; margin-top: .12in; display: flex; gap: .2in; justify-content: space-between; align-items: end; }
+.sheet-footer p { margin: 0; }
+.print-position { white-space: nowrap; }
+.no-selection { display: none; padding: .3in; }
+body.empty .no-selection { display: block; }
+@media screen and (max-width: 820px) {
+  .sheet { width: calc(100% - 1rem); height: auto; min-height: 10.8in; padding: .3in; margin: .5rem; }
+  .writing { min-height: 1.1in; }
+  .choices { grid-template-columns: 1fr; }
+  .record-row { flex-wrap: wrap; gap: 0 .15in; }
+  .record-row span { white-space: normal; min-width: 45%; }
+}
+@page { size: auto; margin: .5in; }
+@media print {
+  html, body { margin: 0; padding: 0; background: #fff; color: #000; }
+  .screen-only { display: none !important; }
+  .sheet { width: auto; height: 9.8in; min-height: 0; margin: 0; padding: 0; border: 0; break-inside: avoid; break-after: page; page-break-after: always; }
+  .sheet.last-selected { break-after: auto; page-break-after: auto; }
+  .sheet.excluded { display: none !important; }
+  .sheet-top { min-height: .12in; }
+  .question, .record, .sheet-footer { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<header class="controls screen-only">
+<h1>Workplace Learning Worksheets</h1>
+<p>Choose the sheets you need, print blank copies, and write answers by hand. Each topic can be reused with different people or on different days. Nothing is entered or saved in this page.</p>
+<p><strong>A gentle opener:</strong> “I’m learning how this works and trying to leave clearer notes. Could I ask you a couple of questions? Please feel free to correct anything I’ve misunderstood.” Ask the main question first; use the smaller prompts only when helpful.</p>
+<p><strong>Print setup:</strong> Letter or A4, portrait, 100% scale, one page per sheet, margins set to Default (the file supplies 0.5-inch margins). Turn off browser headers/footers and background graphics. Use the print dialog’s Copies field for repeat copies. Preview before printing; printer settings can vary.</p>
+<noscript><p><strong>JavaScript is off:</strong> all 17 worksheets are still available below. Use your browser’s Print command and page ranges. Selection controls require JavaScript.</p></noscript>
+<div id="print-controls" hidden class="screen-only">
+<div class="toolbar" aria-label="Choose a worksheet set">
+<button type="button" data-set="all">Select all</button>
+<button type="button" data-set="none">Clear selection</button>
+<button type="button" data-set="conversation">Conversation topics</button>
+<button type="button" data-set="template">Record templates</button>
+<button type="button" data-set="gather">Gathering &amp; observation</button>
+<button type="button" data-set="error-pair">Error pair</button>
+<button type="button" data-set="alias-pair">Command pair</button>
+</div>
+<fieldset><legend>Sheets to preview and print</legend><div class="choices">
+<label class="choice"><input type="checkbox" value="people" checked> <span>01 · Learning the workflow</span></label>
+<label class="choice"><input type="checkbox" value="hardware" checked> <span>02 · Components, racks &amp; connections</span></label>
+<label class="choice"><input type="checkbox" value="configuration" checked> <span>03 · One server configuration</span></label>
+<label class="choice"><input type="checkbox" value="route" checked> <span>04 · Following a unit through testing</span></label>
+<label class="choice"><input type="checkbox" value="stage" checked> <span>05 · One test stage</span></label>
+<label class="choice"><input type="checkbox" value="access" checked> <span>06 · Finding and using information</span></label>
+<label class="choice"><input type="checkbox" value="updates" checked> <span>07 · Updates that help the next team</span></label>
+<label class="choice"><input type="checkbox" value="procedure" checked> <span>08 · One task or procedure</span></label>
+<label class="choice"><input type="checkbox" value="error" checked> <span>09 · One error or knowledge entry</span></label>
+<label class="choice"><input type="checkbox" value="action" checked> <span>10 · One investigative step</span></label>
+<label class="choice"><input type="checkbox" value="alias" checked> <span>11 · One command or alias: definition</span></label>
+<label class="choice"><input type="checkbox" value="outputs" checked> <span>12 · One command or alias: results</span></label>
+<label class="choice"><input type="checkbox" value="handoff" checked> <span>13 · One handoff</span></label>
+<label class="choice"><input type="checkbox" value="isolation" checked> <span>14 · One investigation: evidence &amp; uncertainty</span></label>
+<label class="choice"><input type="checkbox" value="gather" checked> <span>15 · Source-gathering checklist</span></label>
+<label class="choice"><input type="checkbox" value="observe" checked> <span>16 · Observation &amp; time notes</span></label>
+<label class="choice"><input type="checkbox" value="continuation" checked> <span>17 · Continuation &amp; follow-up</span></label>
+</div></fieldset>
+<div class="toolbar"><button type="button" id="print-selected">Print selected sheets</button><span id="selection-status" role="status" aria-live="polite">17 sheets selected</span></div>
+<p>Each sheet also has a “Print this sheet” button. That selects just that sheet and opens the print dialog. Your selection stays visible afterward; choose another set whenever you like. Ctrl+P / Cmd+P prints the currently selected set.</p>
+</div>
+</header>
+<main id="worksheets">
+<article class="sheet" id="people" data-group="conversation" aria-labelledby="title-people">
+<header>
+<div class="sheet-top"><span>WORKPLACE LEARNING · SHEET 01</span><button type="button" class="screen-only single-print" data-sheet="people" hidden aria-label="Print sheet 01: Learning the workflow">Print this sheet</button></div>
+<h2 id="title-people">Learning the workflow</h2>
+<p class="intro">A few questions to help me understand how the work fits together. Please answer only what you know; examples and corrections are welcome.</p>
+<div class="record">
+<div class="record-row"><span>Date / shift: ____________________</span><span>Record label: ____________________</span></div>
+<div>Source role / team or document &amp; revision: __________________________________________________</div>
+<div>Basis (circle): recollection / observed / current reference / needs checking</div>
+</div>
+</header>
+<div class="questions">
+<section class="question">
+<h3>01.1 &nbsp; Could you walk me through what your team needs from Testing?</h3>
+<p class="probes">If helpful: what makes a unit ready to receive, what you need in the record, and what often sends work back.</p>
+<p class="benefit"><strong>How this helps:</strong> Clearer handoffs can reduce repeated questions and return trips.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>01.2 &nbsp; What do you wish someone had explained when you first started?</h3>
+<p class="probes">If helpful: local terms, everyday conventions, a common misunderstanding, or a task worth learning first.</p>
+<p class="benefit"><strong>How this helps:</strong> New associates can become useful sooner with fewer avoidable interruptions.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>01.3 &nbsp; When I am unsure, what is a good way to ask for help?</h3>
+<p class="probes">If helpful: which role to approach, what evidence to bring, when to interrupt, and when to escalate.</p>
+<p class="benefit"><strong>How this helps:</strong> Better questions can make it easier for experienced teammates to help.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+</div>
+<footer class="sheet-footer"><p>Unknown is a useful answer. Note source differences rather than choosing a winner.<br>Follow-up / source to check: __________________________________________________</p><span class="print-position">Sheet 01</span></footer>
+</article>
+<article class="sheet" id="hardware" data-group="conversation" aria-labelledby="title-hardware">
+<header>
+<div class="sheet-top"><span>WORKPLACE LEARNING · SHEET 02</span><button type="button" class="screen-only single-print" data-sheet="hardware" hidden aria-label="Print sheet 02: Components, racks &amp; connections">Print this sheet</button></div>
+<h2 id="title-hardware">Components, racks &amp; connections</h2>
+<p class="intro">Use one familiar setup. A simple sketch is welcome; label anything that varies or still needs checking.</p>
+<div class="record">
+<div class="record-row"><span>Date / shift: ____________________</span><span>Record label: ____________________</span></div>
+<div>Source role / team or document &amp; revision: __________________________________________________</div>
+<div>Basis (circle): recollection / observed / current reference / needs checking</div>
+</div>
+</header>
+<div class="questions">
+<section class="question">
+<h3>02.1 &nbsp; Could you show me the main components and explain what each does?</h3>
+<p class="probes">If helpful: what connects to what, what we can observe, and a trustworthy diagram or reference.</p>
+<p class="benefit"><strong>How this helps:</strong> Understanding component roles can make symptoms easier to describe.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>02.2 &nbsp; How do the rack, server, BMC, network and test system connect?</h3>
+<p class="probes">Please sketch the path. Where does Fusion Eye fit, and when using SSH, which kind of machine are we reaching? Use role labels rather than addresses.</p>
+<p class="benefit"><strong>How this helps:</strong> A shared picture can help separate connection problems from unit problems.</p>
+<div class="writing diagram" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>02.3 &nbsp; How do we confirm we are looking at the right unit and location?</h3>
+<p class="probes">If helpful: rack/shelf labeling, target checks, and how a missing or unreachable unit is handled.</p>
+<p class="benefit"><strong>How this helps:</strong> Consistent identification can prevent checks being applied to the wrong target.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+</div>
+<footer class="sheet-footer"><p>Unknown is a useful answer. Note source differences rather than choosing a winner.<br>Follow-up / source to check: __________________________________________________</p><span class="print-position">Sheet 02</span></footer>
+</article>
+<article class="sheet" id="configuration" data-group="conversation" aria-labelledby="title-configuration">
+<header>
+<div class="sheet-top"><span>WORKPLACE LEARNING · SHEET 03</span><button type="button" class="screen-only single-print" data-sheet="configuration" hidden aria-label="Print sheet 03: One server configuration">Print this sheet</button></div>
+<h2 id="title-configuration">One server configuration</h2>
+<p class="intro">Repeat for each configuration you encounter. Generation/configuration being discussed: __________________________________</p>
+<div class="record">
+<div class="record-row"><span>Date / shift: ____________________</span><span>Record label: ____________________</span></div>
+<div>Source role / team or document &amp; revision: __________________________________________________</div>
+<div>Basis (circle): recollection / observed / current reference / needs checking</div>
+</div>
+</header>
+<div class="questions">
+<section class="question">
+<h3>03.1 &nbsp; How do you identify this configuration and find what belongs in it?</h3>
+<p class="probes">If helpful: required components, quantities, positions, and the current source of the expected inventory.</p>
+<p class="benefit"><strong>How this helps:</strong> A reliable baseline can reduce guesswork about missing or unexpected parts.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>03.2 &nbsp; Where do we check the expected firmware, modes and settings?</h3>
+<p class="probes">What varies by generation or configuration? Who maintains the values, and how can we tell the reference is current?</p>
+<p class="benefit"><strong>How this helps:</strong> Current configuration information can prevent misleading comparisons.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>03.3 &nbsp; What can look unusual here but still be expected?</h3>
+<p class="probes">Could you give an example, its conditions, and a reference? What would make you investigate or ask for help instead?</p>
+<p class="benefit"><strong>How this helps:</strong> Knowing legitimate differences can reduce false alarms and unnecessary work.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+</div>
+<footer class="sheet-footer"><p>Unknown is a useful answer. Note source differences rather than choosing a winner.<br>Follow-up / source to check: __________________________________________________</p><span class="print-position">Sheet 03</span></footer>
+</article>
+<article class="sheet" id="route" data-group="conversation" aria-labelledby="title-route">
+<header>
+<div class="sheet-top"><span>WORKPLACE LEARNING · SHEET 04</span><button type="button" class="screen-only single-print" data-sheet="route" hidden aria-label="Print sheet 04: Following a unit through testing">Print this sheet</button></div>
+<h2 id="title-route">Following a unit through testing</h2>
+<p class="intro">Please describe the route as it works for the example you know, including exceptions. This sheet does not assume a fixed sequence.</p>
+<div class="record">
+<div class="record-row"><span>Date / shift: ____________________</span><span>Record label: ____________________</span></div>
+<div>Source role / team or document &amp; revision: __________________________________________________</div>
+<div>Basis (circle): recollection / observed / current reference / needs checking</div>
+</div>
+</header>
+<div class="questions">
+<section class="question">
+<h3>04.1 &nbsp; Could you walk me through a unit's route from Inspection onward?</h3>
+<p class="probes">Sketch the stages and teams. Include which tests happen before and after repair and where Run-In belongs.</p>
+<p class="benefit"><strong>How this helps:</strong> A clear route can make the next handoff and required work easier to understand.</p>
+<div class="writing diagram" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>04.2 &nbsp; How are QT1, QT2 and QT3 used here, if those labels apply?</h3>
+<p class="probes">I may have mixed up the labels. Which sequence belongs to each? Does INIT run once per sequence or before each test?</p>
+<p class="benefit"><strong>How this helps:</strong> Resolving stage names can prevent mixed instructions and missed context.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>04.3 &nbsp; What changes the route when a unit passes, fails or needs another attempt?</h3>
+<p class="probes">If helpful: repeat tests, rework, holds, release conditions, and who decides the next destination.</p>
+<p class="benefit"><strong>How this helps:</strong> Clear exception paths can reduce waiting and unnecessary repeat testing.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+</div>
+<footer class="sheet-footer"><p>Unknown is a useful answer. Note source differences rather than choosing a winner.<br>Follow-up / source to check: __________________________________________________</p><span class="print-position">Sheet 04</span></footer>
+</article>
+<article class="sheet" id="stage" data-group="template" aria-labelledby="title-stage">
+<header>
+<div class="sheet-top"><span>WORKPLACE LEARNING · SHEET 05</span><button type="button" class="screen-only single-print" data-sheet="stage" hidden aria-label="Print sheet 05: One test stage">Print this sheet</button></div>
+<h2 id="title-stage">One test stage</h2>
+<p class="intro">Repeat for INIT, FLA, FLC, PreTest, IST, FCT, FBB, FINT or another stage. Stage being discussed: __________________________</p>
+<div class="record">
+<div class="record-row"><span>Date / shift: ____________________</span><span>Record label: ____________________</span></div>
+<div>Source role / team or document &amp; revision: __________________________________________________</div>
+<div>Basis (circle): recollection / observed / current reference / needs checking</div>
+</div>
+</header>
+<div class="questions">
+<section class="question">
+<h3>05.1 &nbsp; What does this stage actually do, and what must be ready first?</h3>
+<p class="probes">If helpful: components covered, data or values it uses, environment setup, and any state, firmware or configuration it changes.</p>
+<p class="benefit"><strong>How this helps:</strong> Understanding scope and prerequisites can prevent avoidable test failures.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>05.2 &nbsp; What tells us the stage completed correctly?</h3>
+<p class="probes">Where is the result recorded? What are the criteria, normal duration range, and limits of what a successful result proves?</p>
+<p class="benefit"><strong>How this helps:</strong> Clear evidence can help everyone interpret the result consistently.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>05.3 &nbsp; What should happen if it fails, stalls or cannot start?</h3>
+<p class="probes">If helpful: stop conditions, recovery/retry rules, when this stage is inappropriate, and the current procedure or responsible role.</p>
+<p class="benefit"><strong>How this helps:</strong> Known next steps can reduce guesswork and unsupported retries.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+</div>
+<footer class="sheet-footer"><p>Unknown is a useful answer. Note source differences rather than choosing a winner.<br>Follow-up / source to check: __________________________________________________</p><span class="print-position">Sheet 05</span></footer>
+</article>
+<article class="sheet" id="access" data-group="conversation" aria-labelledby="title-access">
+<header>
+<div class="sheet-top"><span>WORKPLACE LEARNING · SHEET 06</span><button type="button" class="screen-only single-print" data-sheet="access" hidden aria-label="Print sheet 06: Finding and using information">Print this sheet</button></div>
+<h2 id="title-access">Finding and using information</h2>
+<p class="intro">Focus on resources already available to an associate. It is fine to point me toward the right person or source.</p>
+<div class="record">
+<div class="record-row"><span>Date / shift: ____________________</span><span>Record label: ____________________</span></div>
+<div>Source role / team or document &amp; revision: __________________________________________________</div>
+<div>Basis (circle): recollection / observed / current reference / needs checking</div>
+</div>
+</header>
+<div class="questions">
+<section class="question">
+<h3>06.1 &nbsp; Where would you look first for a reliable answer about a unit or test?</h3>
+<p class="probes">If helpful: ServiceMe search, SharePoint, Fusion Eye, NvDebug, exact search terms, and what each source is best for.</p>
+<p class="benefit"><strong>How this helps:</strong> Knowing where to look can shorten searches and reduce repeated questions.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>06.2 &nbsp; What can someone in my role read, save, edit or share?</h3>
+<p class="probes">If helpful: permitted file locations, available formats, shell/profile changes, installed tools, and who clarifies access limits.</p>
+<p class="benefit"><strong>How this helps:</strong> Clear access expectations can make learning and recordkeeping smoother.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>06.3 &nbsp; How do we tell whether a note or procedure is current and correct?</h3>
+<p class="probes">Who reviews it? How are corrections, conflicting answers, older revisions and removal handled? Can contributors recover an accidental edit?</p>
+<p class="benefit"><strong>How this helps:</strong> Reliable revision and correction practices can keep stale advice from spreading.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+</div>
+<footer class="sheet-footer"><p>Unknown is a useful answer. Note source differences rather than choosing a winner.<br>Follow-up / source to check: __________________________________________________</p><span class="print-position">Sheet 06</span></footer>
+</article>
+<article class="sheet" id="updates" data-group="conversation" aria-labelledby="title-updates">
+<header>
+<div class="sheet-top"><span>WORKPLACE LEARNING · SHEET 07</span><button type="button" class="screen-only single-print" data-sheet="updates" hidden aria-label="Print sheet 07: Updates that help the next team">Print this sheet</button></div>
+<h2 id="title-updates">Updates that help the next team</h2>
+<p class="intro">Examples about the work are helpful; names or evaluations of coworkers are not needed.</p>
+<div class="record">
+<div class="record-row"><span>Date / shift: ____________________</span><span>Record label: ____________________</span></div>
+<div>Source role / team or document &amp; revision: __________________________________________________</div>
+<div>Basis (circle): recollection / observed / current reference / needs checking</div>
+</div>
+</header>
+<div class="questions">
+<section class="question">
+<h3>07.1 &nbsp; Which updates from other teams are most useful during your shift?</h3>
+<p class="probes">Where do you currently receive them? Which are unit-specific, and which affect several units or the whole shift?</p>
+<p class="benefit"><strong>How this helps:</strong> Relevant updates can help the next team act with the right context.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>07.2 &nbsp; When an update changes, how can we find the latest version?</h3>
+<p class="probes">If helpful: existing channels, author/owner, event and posting times, expiry, corrections, and who keeps it current.</p>
+<p class="benefit"><strong>How this helps:</strong> Current information can reduce work based on an outdated notice.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>07.3 &nbsp; Could you describe a recent delay or repeated task that better information might have helped?</h3>
+<p class="probes">What was missing, what happened next, and roughly how much time was involved? Mark estimates; mention what already works well.</p>
+<p class="benefit"><strong>How this helps:</strong> Concrete examples can show where clearer information would make a practical difference.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+</div>
+<footer class="sheet-footer"><p>Unknown is a useful answer. Note source differences rather than choosing a winner.<br>Follow-up / source to check: __________________________________________________</p><span class="print-position">Sheet 07</span></footer>
+</article>
+<article class="sheet" id="procedure" data-group="template" aria-labelledby="title-procedure">
+<header>
+<div class="sheet-top"><span>WORKPLACE LEARNING · SHEET 08</span><button type="button" class="screen-only single-print" data-sheet="procedure" hidden aria-label="Print sheet 08: One task or procedure">Print this sheet</button></div>
+<h2 id="title-procedure">One task or procedure</h2>
+<p class="intro">Choose one frequent task. Task / procedure / revision: __________________________________________________________</p>
+<div class="record">
+<div class="record-row"><span>Date / shift: ____________________</span><span>Record label: ____________________</span></div>
+<div>Source role / team or document &amp; revision: __________________________________________________</div>
+<div>Basis (circle): recollection / observed / current reference / needs checking</div>
+</div>
+</header>
+<div class="questions">
+<section class="question">
+<h3>08.1 &nbsp; Could you walk me through this task as you would for a new teammate?</h3>
+<p class="probes">What must be ready first? Record the steps in order, expected observations, and where the current instructions live.</p>
+<p class="benefit"><strong>How this helps:</strong> Clear steps can reduce avoidable errors and repeated explanations.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>08.2 &nbsp; Where do people usually need a little more explanation?</h3>
+<p class="probes">If helpful: unfamiliar terms, hidden prerequisites, exceptions, configuration differences, or steps easy to misread.</p>
+<p class="benefit"><strong>How this helps:</strong> Newcomer context can make existing instructions easier to follow.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>08.3 &nbsp; When should I stop, ask for help or use a different procedure?</h3>
+<p class="probes">What should the final state be, what must be recorded, and which role can confirm these instructions?</p>
+<p class="benefit"><strong>How this helps:</strong> Clear limits and completion criteria can make the result easier to trust.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+</div>
+<footer class="sheet-footer"><p>Unknown is a useful answer. Note source differences rather than choosing a winner.<br>Follow-up / source to check: __________________________________________________</p><span class="print-position">Sheet 08</span></footer>
+</article>
+<article class="sheet" id="error" data-group="template" aria-labelledby="title-error">
+<header>
+<div class="sheet-top"><span>WORKPLACE LEARNING · SHEET 09</span><button type="button" class="screen-only single-print" data-sheet="error" hidden aria-label="Print sheet 09: One error or knowledge entry">Print this sheet</button></div>
+<h2 id="title-error">One error or knowledge entry</h2>
+<p class="intro">Use one exact error per record. Error / topic / linked record: ____________________________________________________</p>
+<div class="record">
+<div class="record-row"><span>Date / shift: ____________________</span><span>Record label: ____________________</span></div>
+<div>Source role / team or document &amp; revision: __________________________________________________</div>
+<div>Basis (circle): recollection / observed / current reference / needs checking</div>
+</div>
+</header>
+<div class="questions">
+<section class="question">
+<h3>09.1 &nbsp; Could you help me capture exactly what this message says and where it appears?</h3>
+<p class="probes">Record code and full text, tool/version, test stage, generation/configuration, conditions, and output reference. Attach a permitted local reference if long.</p>
+<p class="benefit"><strong>How this helps:</strong> Exact context can help distinguish similar-looking errors.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>09.2 &nbsp; What does this message mean in this situation, and how do we know?</h3>
+<p class="probes">Separate documented meaning, observed result and interpretation. Note the source/revision, limits, and any different meaning elsewhere.</p>
+<p class="benefit"><strong>How this helps:</strong> A scoped explanation can reduce wrong assumptions and repeated searches.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>09.3 &nbsp; What is still uncertain, and where could I check the next step?</h3>
+<p class="probes">If helpful: conflicting accounts, cases where a suspected fix did not help, related messages, and a reviewer or current procedure.</p>
+<p class="benefit"><strong>How this helps:</strong> Preserving uncertainty can keep an incomplete explanation from becoming misleading advice.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+</div>
+<footer class="sheet-footer"><p>Unknown is a useful answer. Note source differences rather than choosing a winner.<br>Follow-up / source to check: __________________________________________________</p><span class="print-position">Sheet 09</span></footer>
+</article>
+<article class="sheet" id="action" data-group="template" aria-labelledby="title-action">
+<header>
+<div class="sheet-top"><span>WORKPLACE LEARNING · SHEET 10</span><button type="button" class="screen-only single-print" data-sheet="action" hidden aria-label="Print sheet 10: One investigative step">Print this sheet</button></div>
+<h2 id="title-action">One investigative step</h2>
+<p class="intro">Link to an error, task or case. Related record: ____________________  Step / action label: __________________________</p>
+<div class="record">
+<div class="record-row"><span>Date / shift: ____________________</span><span>Record label: ____________________</span></div>
+<div>Source role / team or document &amp; revision: __________________________________________________</div>
+<div>Basis (circle): recollection / observed / current reference / needs checking</div>
+</div>
+</header>
+<div class="questions">
+<section class="question">
+<h3>10.1 &nbsp; What would be a useful next check here, and what question would it answer?</h3>
+<p class="probes">Record the applicable instruction and source/revision, prerequisites, required authority, and anything it changes.</p>
+<p class="benefit"><strong>How this helps:</strong> A check with a clear purpose can narrow the issue instead of repeating work.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>10.2 &nbsp; What different results might we see, and what would each suggest next?</h3>
+<p class="probes">If helpful: expected result, unexpected result, incomplete/unknown result, and the supported next step or stopping point for each.</p>
+<p class="benefit"><strong>How this helps:</strong> Interpretable results can make an investigation easier to continue.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>10.3 &nbsp; What would make this check unsuitable or tell us to stop and escalate?</h3>
+<p class="probes">Note scope limits, inconclusive outcomes, recovery conditions, and who can review the guidance.</p>
+<p class="benefit"><strong>How this helps:</strong> Clear boundaries can reduce unsupported retries and conclusions.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+</div>
+<footer class="sheet-footer"><p>Unknown is a useful answer. Note source differences rather than choosing a winner.<br>Follow-up / source to check: __________________________________________________</p><span class="print-position">Sheet 10</span></footer>
+</article>
+<article class="sheet" id="alias" data-group="template" aria-labelledby="title-alias">
+<header>
+<div class="sheet-top"><span>WORKPLACE LEARNING · SHEET 11</span><button type="button" class="screen-only single-print" data-sheet="alias" hidden aria-label="Print sheet 11: One command or alias: definition">Print this sheet</button></div>
+<h2 id="title-alias">One command or alias: definition</h2>
+<p class="intro">Repeat for each command. Name: ____________________  Related output sheet / record: ____________________________</p>
+<div class="record">
+<div class="record-row"><span>Date / shift: ____________________</span><span>Record label: ____________________</span></div>
+<div>Source role / team or document &amp; revision: __________________________________________________</div>
+<div>Basis (circle): recollection / observed / current reference / needs checking</div>
+</div>
+</header>
+<div class="questions">
+<section class="question">
+<h3>11.1 &nbsp; Could you point me to the current definition and explain what it does?</h3>
+<p class="probes">Record alias/function/script type, exact body or source location/revision, helper files, maintainer role, and how to credit the contributor.</p>
+<p class="benefit"><strong>How this helps:</strong> An accurate reference can make existing commands easier to learn and maintain.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>11.2 &nbsp; What does it need, and where does it run?</h3>
+<p class="probes">Record shell, dependencies/versions, arguments, target type, target identity checks, and whether it behaves differently outside an interactive session.</p>
+<p class="benefit"><strong>How this helps:</strong> Knowing the context can prevent failures caused by using a command in the wrong place.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>11.3 &nbsp; Does it only read information, or can it change something?</h3>
+<p class="probes">Ask about power, firmware, configuration, logs and running tests. What prerequisites, access, stop rules, installation and removal instructions apply?</p>
+<p class="benefit"><strong>How this helps:</strong> Understanding effects can help people use the command appropriately.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+</div>
+<footer class="sheet-footer"><p>Unknown is a useful answer. Note source differences rather than choosing a winner.<br>Follow-up / source to check: __________________________________________________</p><span class="print-position">Sheet 11</span></footer>
+</article>
+<article class="sheet" id="outputs" data-group="template" aria-labelledby="title-outputs">
+<header>
+<div class="sheet-top"><span>WORKPLACE LEARNING · SHEET 12</span><button type="button" class="screen-only single-print" data-sheet="outputs" hidden aria-label="Print sheet 12: One command or alias: results">Print this sheet</button></div>
+<h2 id="title-outputs">One command or alias: results</h2>
+<p class="intro">Command / revision: __________________________  Link to definition sheet / record: _____________________________</p>
+<div class="record">
+<div class="record-row"><span>Date / shift: ____________________</span><span>Record label: ____________________</span></div>
+<div>Source role / team or document &amp; revision: __________________________________________________</div>
+<div>Basis (circle): recollection / observed / current reference / needs checking</div>
+</div>
+</header>
+<div class="questions">
+<section class="question">
+<h3>12.1 &nbsp; Could you show me a representative successful result and how you read it?</h3>
+<p class="probes">Record permitted output or its source, relevant conditions, exit status, and the exact field that supports the interpretation.</p>
+<p class="benefit"><strong>How this helps:</strong> A concrete example can make results easier to recognize.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>12.2 &nbsp; What does failure, partial output or an unreachable target look like?</h3>
+<p class="probes">Record examples or source references, exit codes, missing fields, and what each result does not prove.</p>
+<p class="benefit"><strong>How this helps:</strong> Distinct failure examples can keep missing information from being mistaken for success.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>12.3 &nbsp; What happens if it waits, prompts, times out or is interrupted?</h3>
+<p class="probes">If helpful: normal duration, bounded waits, cancellation, retry rules, effects left behind, and what to do while another test is running.</p>
+<p class="benefit"><strong>How this helps:</strong> Predictable handling can reduce stalled work and unsafe repetition.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+</div>
+<footer class="sheet-footer"><p>Unknown is a useful answer. Note source differences rather than choosing a winner.<br>Follow-up / source to check: __________________________________________________</p><span class="print-position">Sheet 12</span></footer>
+</article>
+<article class="sheet" id="handoff" data-group="template" aria-labelledby="title-handoff">
+<header>
+<div class="sheet-top"><span>WORKPLACE LEARNING · SHEET 13</span><button type="button" class="screen-only single-print" data-sheet="handoff" hidden aria-label="Print sheet 13: One handoff">Print this sheet</button></div>
+<h2 id="title-handoff">One handoff</h2>
+<p class="intro">Use an example without identifying a unit here. Stage / receiving team: ______________________________________________</p>
+<div class="record">
+<div class="record-row"><span>Date / shift: ____________________</span><span>Record label: ____________________</span></div>
+<div>Source role / team or document &amp; revision: __________________________________________________</div>
+<div>Basis (circle): recollection / observed / current reference / needs checking</div>
+</div>
+</header>
+<div class="questions">
+<section class="question">
+<h3>13.1 &nbsp; What should the next person know about the starting problem and current state?</h3>
+<p class="probes">Record the symptom, exact error, configuration, stage, current blocker, and when the current state was checked.</p>
+<p class="benefit"><strong>How this helps:</strong> A clear starting point can reduce reconstruction and clarification.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>13.2 &nbsp; What has already been observed or done, in what order, and with what result?</h3>
+<p class="probes">Record event times, actions, changes, actual observations and evidence references. Keep later note-writing times separate.</p>
+<p class="benefit"><strong>How this helps:</strong> A reliable timeline can prevent repeated work and lost evidence.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>13.3 &nbsp; What belongs in ServiceMe and the Traveler before the handoff is complete?</h3>
+<p class="probes">Record required fields, destination/owner, remaining uncertainty, the next question, and any difference between the two records.</p>
+<p class="benefit"><strong>How this helps:</strong> Complete, consistent records can help the receiving team continue promptly.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+</div>
+<footer class="sheet-footer"><p>Unknown is a useful answer. Note source differences rather than choosing a winner.<br>Follow-up / source to check: __________________________________________________</p><span class="print-position">Sheet 13</span></footer>
+</article>
+<article class="sheet" id="isolation" data-group="template" aria-labelledby="title-isolation">
+<header>
+<div class="sheet-top"><span>WORKPLACE LEARNING · SHEET 14</span><button type="button" class="screen-only single-print" data-sheet="isolation" hidden aria-label="Print sheet 14: One investigation: evidence &amp; uncertainty">Print this sheet</button></div>
+<h2 id="title-isolation">One investigation: evidence &amp; uncertainty</h2>
+<p class="intro">Use observations from permitted work or a practice example. Case label / stage / configuration: ________________________</p>
+<div class="record">
+<div class="record-row"><span>Date / shift: ____________________</span><span>Record label: ____________________</span></div>
+<div>Source role / team or document &amp; revision: __________________________________________________</div>
+<div>Basis (circle): recollection / observed / current reference / needs checking</div>
+</div>
+</header>
+<div class="questions">
+<section class="question">
+<h3>14.1 &nbsp; What have we observed, and which explanations are still possible?</h3>
+<p class="probes">For each candidate: supporting evidence, contradicting evidence, conditions, and what remains unknown. Keep guesses visibly separate.</p>
+<p class="benefit"><strong>How this helps:</strong> Clear reasoning can reduce unnecessary substitutions and repeated checks.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>14.2 &nbsp; Which supported check could distinguish those explanations?</h3>
+<p class="probes">Record its source, prerequisites, expected result under each candidate, stop conditions, and the actual result if already performed.</p>
+<p class="benefit"><strong>How this helps:</strong> A distinguishing check can move an investigation forward.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>14.3 &nbsp; What does the result establish, and what still needs verification?</h3>
+<p class="probes">Note changed conditions, unresolved candidates, required verification and its actual status. A successful replacement alone may not explain the cause.</p>
+<p class="benefit"><strong>How this helps:</strong> Scoped conclusions can make repair decisions and handoffs more dependable.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+</div>
+<footer class="sheet-footer"><p>Unknown is a useful answer. Note source differences rather than choosing a winner.<br>Follow-up / source to check: __________________________________________________</p><span class="print-position">Sheet 14</span></footer>
+</article>
+<article class="sheet" id="gather" data-group="gather" aria-labelledby="title-gather">
+<header>
+<div class="sheet-top"><span>WORKPLACE LEARNING · SHEET 15</span><button type="button" class="screen-only single-print" data-sheet="gather" hidden aria-label="Print sheet 15: Source-gathering checklist">Print this sheet</button></div>
+<h2 id="title-gather">Source-gathering checklist</h2>
+<p class="intro">No conversation required. Locate existing material you are allowed to use; keep it in its workplace location. Record references and missing items, not credentials or identifiers.</p>
+<div class="record">
+<div class="record-row"><span>Date / shift: ____________________</span><span>Record label: ____________________</span></div>
+<div>Source role / team or document &amp; revision: __________________________________________________</div>
+<div>Basis (circle): recollection / observed / current reference / needs checking</div>
+</div>
+</header>
+<div class="questions">
+<section class="question">
+<h3>15.1 &nbsp; Locate command definitions and representative output.</h3>
+<p class="probes">Look for the current script, helper files, install/remove notes, revision, dependencies, and success/failure/partial examples. Record what you found and what is missing.</p>
+<p class="benefit"><strong>How this helps:</strong> Complete references can reduce misunderstandings about existing commands.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>15.2 &nbsp; Locate current procedures, configuration references and error material.</h3>
+<p class="probes">Look for applicable inventory/firmware/mode baselines, diagrams, test criteria/routes, partial error lists, and review dates. Preserve each source's scope.</p>
+<p class="benefit"><strong>How this helps:</strong> Current source material can reduce guesses and outdated comparisons.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>15.3 &nbsp; Locate record requirements and existing update channels.</h3>
+<p class="probes">Look for blank ticket/Traveler fields, an accepted sanitized example, search/help guidance, shared notices, and correction/retention instructions.</p>
+<p class="benefit"><strong>How this helps:</strong> Reusing existing resources can reduce duplicate recordkeeping.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+</div>
+<footer class="sheet-footer"><p>Unknown is a useful answer. Note source differences rather than choosing a winner.<br>Follow-up / source to check: __________________________________________________</p><span class="print-position">Sheet 15</span></footer>
+</article>
+<article class="sheet" id="observe" data-group="gather" aria-labelledby="title-observe">
+<header>
+<div class="sheet-top"><span>WORKPLACE LEARNING · SHEET 16</span><button type="button" class="screen-only single-print" data-sheet="observe" hidden aria-label="Print sheet 16: Observation &amp; time notes">Print this sheet</button></div>
+<h2 id="title-observe">Observation &amp; time notes</h2>
+<p class="intro">Observe ordinary permitted work without changing a unit just to complete this sheet. No coworker names, scores or comparisons are needed.</p>
+<div class="record">
+<div class="record-row"><span>Date / shift: ____________________</span><span>Record label: ____________________</span></div>
+<div>Source role / team or document &amp; revision: __________________________________________________</div>
+<div>Basis (circle): recollection / observed / current reference / needs checking</div>
+</div>
+</header>
+<div class="questions">
+<section class="question">
+<h3>16.1 &nbsp; Describe one task, its conditions, and what information it needed.</h3>
+<p class="probes">Record task type, stage/configuration if relevant, source used, and what made the example typical or unusual.</p>
+<p class="benefit"><strong>How this helps:</strong> Context helps distinguish a recurring problem from an exceptional case.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>16.2 &nbsp; Record the timing and any repeat work.</h3>
+<p class="probes">Start/end times; active effort versus waiting; searches, clarifications or repeated tests; reason for repetition. Label measured times and estimates separately.</p>
+<p class="benefit"><strong>How this helps:</strong> A simple baseline can show where clearer information might save effort.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>16.3 &nbsp; Record the result and what would make it easier next time.</h3>
+<p class="probes">Was the answer useful and correct? Note missing information, corrections, extra documentation effort, and a comparable case to check later.</p>
+<p class="benefit"><strong>How this helps:</strong> Balanced observations can reveal both benefits and extra work.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+</div>
+<footer class="sheet-footer"><p>Unknown is a useful answer. Note source differences rather than choosing a winner.<br>Follow-up / source to check: __________________________________________________</p><span class="print-position">Sheet 16</span></footer>
+</article>
+<article class="sheet last-selected" id="continuation" data-group="extra" aria-labelledby="title-continuation">
+<header>
+<div class="sheet-top"><span>WORKPLACE LEARNING · SHEET 17</span><button type="button" class="screen-only single-print" data-sheet="continuation" hidden aria-label="Print sheet 17: Continuation &amp; follow-up">Print this sheet</button></div>
+<h2 id="title-continuation">Continuation &amp; follow-up</h2>
+<p class="intro">Sheet / question / record being continued: ____________________________________________________________________</p>
+<div class="record">
+<div class="record-row"><span>Date / shift: ____________________</span><span>Record label: ____________________</span></div>
+<div>Source role / team or document &amp; revision: __________________________________________________</div>
+<div>Basis (circle): recollection / observed / current reference / needs checking</div>
+</div>
+</header>
+<div class="questions">
+<section class="question large">
+<h3>17.1 &nbsp; Additional answer, sketch or example</h3>
+<p class="probes">Use the same record label to connect this page to the original.</p>
+<p class="benefit"><strong>How this helps:</strong> Extra space can preserve useful details without squeezing the main answer.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+<section class="question">
+<h3>17.2 &nbsp; What should be checked or asked next?</h3>
+<p class="probes">Record unresolved differences, a source to consult, a role to ask, and a useful follow-up date.</p>
+<p class="benefit"><strong>How this helps:</strong> Open questions stay visible for the next conversation.</p>
+<div class="writing" aria-label="Space for a handwritten answer"><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+</div>
+<footer class="sheet-footer"><p>Unknown is a useful answer. Note source differences rather than choosing a winner.<br>Follow-up / source to check: __________________________________________________</p><span class="print-position">Sheet 17</span></footer>
+</article>
+</main>
+<p class="no-selection">No worksheets selected. Return to the sheet list and choose at least one sheet before printing.</p>
+<script>
+"use strict";
+(() => {
+  const sheets = Array.from(document.querySelectorAll(".sheet"));
+  const checkboxes = Array.from(document.querySelectorAll(".choice input"));
+  const printButton = document.getElementById("print-selected");
+  const status = document.getElementById("selection-status");
+  const syncSelection = () => {
+    const selectedIds = new Set(checkboxes.filter(box => box.checked).map(box => box.value));
+    const selectedSheets = sheets.filter(sheet => selectedIds.has(sheet.id));
+    sheets.forEach(sheet => {
+      sheet.classList.toggle("excluded", !selectedIds.has(sheet.id));
+      sheet.classList.remove("last-selected");
+    });
+    if (selectedSheets.length) selectedSheets[selectedSheets.length - 1].classList.add("last-selected");
+    selectedSheets.forEach((sheet, index) => {
+      sheet.querySelector(".print-position").textContent = "Page " + (index + 1) + " of " + selectedSheets.length;
+    });
+    status.textContent = selectedSheets.length + (selectedSheets.length === 1 ? " sheet selected" : " sheets selected");
+    printButton.disabled = selectedSheets.length === 0;
+    document.body.classList.toggle("empty", selectedSheets.length === 0);
+  };
+  const select = predicate => {
+    checkboxes.forEach(box => { box.checked = predicate(document.getElementById(box.value)); });
+    syncSelection();
+  };
+  checkboxes.forEach(box => box.addEventListener("change", syncSelection));
+  document.querySelectorAll("[data-set]").forEach(button => button.addEventListener("click", () => {
+    const set = button.dataset.set;
+    select(sheet => set === "all" ||
+      (set === "error-pair" && ["error", "action"].includes(sheet.id)) ||
+      (set === "alias-pair" && ["alias", "outputs"].includes(sheet.id)) ||
+      sheet.dataset.group === set);
+  }));
+  printButton.addEventListener("click", () => {
+    syncSelection();
+    if (!printButton.disabled) window.print();
+  });
+  document.querySelectorAll(".single-print").forEach(button => {
+    button.hidden = false;
+    button.addEventListener("click", () => {
+      select(sheet => sheet.id === button.dataset.sheet);
+      window.print();
+    });
+  });
+  window.addEventListener("beforeprint", syncSelection);
+  document.getElementById("print-controls").hidden = false;
+  syncSelection();
+})();
+</script>
+</body>
+</html>

@@ -61,5 +61,6 @@ Hardware lists, test meanings, routes, access, and ideas are expected to change.
 | [buildorders/](buildorders/README.md) | Prioritized tool plans, dependencies, SIFT prompts, adoption limits, and success checks. |
 | [context/](context/README.md) | Working observations, terminology, fiction boundary, and unanswered questions. |
 | [templates/](templates/README.md) | Reusable blank notes for gathering evidence and drafting knowledge. |
+| [print/](print/README.md) | A local, black-and-white workbook with individually printable conversation and gathering sheets. |
 
-This repository currently contains plans and templates. No diagnostic commands, live integrations, or shared applications have been implemented.
+This repository currently contains plans, templates, and a local printable workbook. No diagnostic commands, live integrations, or shared applications have been implemented.
