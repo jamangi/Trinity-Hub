@@ -82,3 +82,10 @@ New information is still **reported / unverified**. Important changes and confli
 - Visual configuration clues, SSD restrictions, socket destinations and equipment readings remain scoped observations, not specifications.
 
 Use the [owner mailbox](../owner_mailbox/CLARIFICATION.md) for focused follow-up. Preserve old observations and add scoped corrections instead of silently replacing the source history.
+
+
+## Owner clarification after the first notebook release
+
+The owner clarified that NvDebug is required for Bianca orders, some technicians omit it, and locating affected cases in ServiceMe is difficult. Refill delays of days, wrong-unit unplugging, weak SOPs and loose isolation before parts orders are reported pains. FRU ambiguity means lacking an expected component-identification baseline for the BMC fru check.
+
+The owner also describes access through a server on the test-rack network and proposes workload-wide observational reports. Exact targets, command behavior, non-interference and data access remain unverified. See [U01–U07 and C21–C28](../owner_mailbox/CLARIFICATION.md) for provenance and open details, and [operations Analysis](../notes/analysis.md) for proposed relief. These clarifications refine the working context without rewriting the historical Notes pages.

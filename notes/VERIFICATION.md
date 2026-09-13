@@ -46,3 +46,11 @@ The existing print workbook was unchanged. No files in Server Repair were modifi
 Twenty [clarification questions](../owner_mailbox/CLARIFICATION.md) remain, including masked or overlapping source text, FLA/FLC codes and functions, command definitions, stage routing, evidence retention, socket destinations, compatibility, holds and Traveler ownership. Operational claims have not been independently confirmed. The process studies are not approved operating procedures.
 
 No task queue was required to deliver this first edition. Optional artwork can be added later; a verified component diagram and clarified source material are the higher-value next additions.
+
+## Operations-focused Analysis revision
+
+The owner clarified the purpose of Analysis after the first release. The revision preserves the former 32 entries in Introspection and adds 12 company-operations analyses, seven owner clarification records and eight further mailbox questions. Notes data and reading editions were compared against the prior release and remain unchanged. Old A-series and group bookmarks resolve to Introspection.
+
+JavaScript syntax checks for scripts/build-notes.mjs, site/app.js and site/content.js passed (exit 0). The test suite passed 20/20 with no failures (exit 0), including operations content, owner provenance, search and bookmark migration. Local Markdown link checks passed. The earlier browser checks above apply to the first release; this revision was checked through source validation and automated route tests, not a new visual browser pass.
+
+Changed files: README.md; context/environment.md; notes/README.md; notes/VERIFICATION.md; notes/analysis.json; notes/analysis.md; notes/introspection.json; notes/introspection.md; notes/owner-updates.json; owner_mailbox/CLARIFICATION.md; scripts/build-notes.mjs; site/README.md; site/index.html; site/app.js; site/content.js; site/styles.css; tests/notes-site.test.mjs. No workplace scripts, integrations or scans were implemented or run. Remaining dependencies are recorded in the mailbox and each proposal.

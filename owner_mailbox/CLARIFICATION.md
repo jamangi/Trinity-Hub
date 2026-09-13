@@ -12,7 +12,7 @@ These questions come from the 2026-09-13 image consolidation. Answer only what y
 | C06 | Could we document a few alias definitions with their arguments, effects and example outputs? | Script locations appear in P023, but no bodies are supplied. P044 has sn/power where earlier material has sh/pwr. | Enable a command reference before any automated preflight. |
 | C07 | When a power error is shown but BMC cannot be reached, what checks distinguish the possible causes? | P036 suggests BMC health. Reachability alone cannot separate target, network, authentication, controller and unit-state issues. | Build an evidence-based investigation entry. |
 | C08 | Under what documented conditions would FBB be appropriate, and what tells us the result actually resolved the issue? | P032 proposes using topology to justify flashing. This remains an unsupported hypothesis. | Keep a learning idea from becoming a repair rule. |
-| C09 | Which Bianca cases need NvDebug evidence, and where should the next team find it? | P018/P022 imply evidence-related ordering delays; absent evidence and hard-to-find evidence may be different causes. | Improve handoff clarity and avoid repeated collection. |
+| C09 | What makes the required NvDebug evidence acceptable for a Bianca order, where is it stored, and when must it be repeated? | Partly clarified by owner in U02: NvDebug is required for Bianca orders; some technicians omit it and affected units are hard to find. Exact evidence/acceptance and repeat rules remain open. | Find order-blocking evidence gaps and distinguish them from completed or historical work. |
 | C10 | Could we trace the three confusing sidebands on an intact unit and identify both endpoints? | P040 mentions broken training sockets. P042 sketches marks without complete paths. Backplane 1→PSB differs from earlier generalized IPEX notes. | Create a trustworthy component map. |
 | C11 | Which side is side 0 in these descriptions, and from which viewing direction are left and right defined? | Pages use physical clues and one explicit from-the-back view. TMP may be TPM; front control plane may mean panel. | Prevent mirrored or mislabeled diagrams. |
 | C12 | Which model/configuration does each SSD and port-count rule apply to, and what record confirms it? | P027, P028 and P037 may describe different test setups. Gaines 3.0 A1 versus engineering remains unresolved. | Keep visual clues within their actual scope. |
@@ -32,3 +32,55 @@ Start with C01–C05 for testing accuracy, C10–C12 for the component map, or C
 ## How to record a resolution
 
 Keep the original reading transcription intact. Add the confirmed wording, source/revision, applicable model and stage, review date, and remaining exceptions to the editorial layer. Use a role or fictional attribution instead of an employee identity. Mark a claim locally confirmed only after supporting evidence is supplied; an AI rewrite alone does not confirm it.
+
+
+## Owner follow-up — operations-focused Analysis
+
+These entries record the owner’s clarification after the first notebook release. Product intent is confirmed by the owner; operational statements are owner-reported rather than independently validated. The original photo transcriptions and Notes presentation remain unchanged.
+
+### U01 — Owner-confirmed product intent
+
+Analysis should examine company operations, reported pain points and opportunities inferred from the system structure. Preserve the previous Analysis as Introspection. Notes already matches the intended direction.
+
+### U02 — Owner-reported operational clarification; exact evidence/acceptance rules still open
+
+Some technicians omit NvDebug on Bianca cases. The owner reports this is a necessary step for ordering Biancas, and that finding units needing it in ServiceMe is difficult. A proposed report would search worklogs for units currently in Diagnostic, Repair or Testing for Bianca/NvDebug mentions, with counts and identifying fields available only inside the workplace.
+
+### U03 — Owner-reported pain point
+
+Units can remain at refill for days. This is a reported delay; its causes, frequency and expected processing or waiting times have not been established.
+
+### U04 — Owner-reported pain points
+
+Unplugging the wrong racked unit, weak SOPs and insufficient isolation before ordering replacement parts are reported operational pain points.
+
+### U05 — Owner clarification of intended meaning; baseline and command coverage still open
+
+Not knowing what FRU data should look like means lacking an expected baseline when using the fru command to check whether BMC identifies the components by their FRU data.
+
+### U06 — Owner-reported access structure and proposed opportunity; target mapping and probe impact unverified
+
+Access to servers being tested is through a server on the test-rack network. A proposed script could check every rack location and report locations without a ping reply. Similar non-disruptive reports could improve visibility across the workload even without a previously recorded pain point.
+
+### U07 — Owner-proposed report fields; one field name remains ambiguous
+
+The proposed NvDebug report fields include ticket number, service tag, OC mac and possibly worklogs. OC mac is retained exactly as supplied; it has not been identified as OS MAC or another address field.
+
+## Further questions raised by the clarification
+
+| ID | Focused question | Current interpretation / recommendation | Benefit |
+| --- | --- | --- | --- |
+| C21 | What does OC mac mean in the proposed report, and which field supplies it? | Retain OC mac exactly; it could refer to OS MAC or another field, but neither is assumed. | Join and identify candidates using the intended field. |
+| C22 | How can we enumerate current Diagnostic, Repair and Testing tickets and read all their worklogs and attachments through an available permitted view or export? | No ServiceMe API is assumed. Record stage source, pagination, inaccessible histories and refresh time. | Make report coverage and counts trustworthy. |
+| C23 | Which worklog wording or evidence artifact distinguishes NvDebug required, planned, completed, missing and no longer relevant to this repair episode? | Keywords find review candidates; no mention does not prove the check was omitted. Use reviewer-confirmed evidence gaps as a separate count. | Reduce false positives and avoid missing cases with different wording. |
+| C24 | What begins and ends refill waiting, what delay is expected, and what commonly blocks the next action? | Keep refill separate from curing; do not infer age from the last comment or label every long wait avoidable. | Find the actual reason units spend days there. |
+| C25 | Which endpoint corresponds to each occupied rack location, when should it answer ping, and what probing scope/rate/exclusions coexist with tests and technicians? | Host, BMC and access-server reachability are different. Use a trusted target map and bounded pilot; no reply is an observation, not a failed-unit verdict. | Produce a useful blanket report without misleading coverage or disturbing work. |
+| C26 | For one configuration, what should the fru output contain and which placeholders, optional components or absent entries are acceptable? | Owner clarified that the pain is the expected BMC component-identification baseline. Wrapper coverage and valid exceptions remain unknown. | Make FRU interpretation faster and more consistent. |
+| C27 | What exact identity and current-state checks precede unplugging, and where could the wrong-unit mismatch be caught? | Start from the existing physical-action procedure and a unique identity; a part number or location alone may not be enough. | Prevent interruption of another unit’s test. |
+| C28 | Which workload exceptions have a responsible role able to take the next action, and where should that outcome be recorded? | Begin with an on-demand personal digest of existing sources, not a second ticket system or automatic assignments. | Turn holistic visibility into useful action rather than another unattended list. |
+
+## Direction for subsequent Analysis entries
+
+Analyze the company operation: observed condition or structure-derived opportunity → plausible effect on repair flow → possible relief → required information → small trial → evidence of value → maintenance/stop condition. Include uncertainty, but keep the central subject the work and its pain points. Do not limit Analysis to producing documentation.
+
+The former 32-entry Analysis is preserved in [Introspection](../notes/introspection.md). The new [operations Analysis](../notes/analysis.md) contains twelve developed cases. Live scripts, automatic updates, workplace scans and sending reports have not been authorized or implemented by this content revision.

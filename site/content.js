@@ -1307,6 +1307,491 @@ window.TRINITY_NOTES = {
   ],
   "analysis": [
     {
+      "id": "OP01",
+      "title": "Find Bianca cases waiting on NvDebug evidence",
+      "group": "Evidence readiness",
+      "status": "Reported pain · proposed worklog report",
+      "sources": [
+        18,
+        22
+      ],
+      "updates": [
+        "U02",
+        "U07"
+      ],
+      "text": "The repair path can stall before a Bianca order when required NvDebug evidence is missing. The owner reports that some technicians omit the step and that the affected units are difficult to find in ServiceMe. The immediate opportunity is to make the evidence gap visible while someone can still act on it.",
+      "reasoning": "Two delays may compound: the check is not completed, and the omission is discovered only when an order is attempted. A report can reduce discovery time; it cannot by itself fix unclear responsibility, unavailable equipment or an unacceptable evidence package.",
+      "improvements": [
+        "Start from a timestamped list of all accessible units currently in Diagnostic, Repair or Testing. Retrieve every relevant worklog page; identify inaccessible or truncated histories instead of silently excluding them.",
+        "Search case-insensitively for Bianca and NvDebug, with locally verified spelling variants. Deduplicate by stable ticket identity. Count unique tickets mentioning Bianca, NvDebug, either, and both; report the overlap rather than adding overlapping totals.",
+        "Show matching excerpts with their timestamps and source links. Distinguish planned work, explicit not-done statements, reported completion, attached evidence, historical mentions and ambiguous cases. A keyword mention is a candidate, not proof that a requirement applies or is satisfied.",
+        "Have a reviewer confirm which cases currently require evidence and whether it is usable for the current repair episode. Give each unresolved case an existing responsible role and next action in ServiceMe; start with a manual digest before scheduling anything."
+      ],
+      "report": [
+        "Coverage: active units/tickets in scope, histories retrieved, retrieval failures, snapshot time and report age.",
+        "Counts: unique Bianca mentions, NvDebug mentions, union, intersection, and reviewer-confirmed open evidence gaps; count units separately from tickets if they are not one-to-one.",
+        "Per candidate: ticket number, service tag, OC mac (meaning unresolved), current stage, match term, worklog time, short excerpt, evidence reference, review state and next action.",
+        "Full worklogs only if the reviewer needs them and the workplace permits the report location. Real identifiers and worklogs stay in workplace systems; public examples are synthetic."
+      ],
+      "assumptions": [
+        "A permitted export, search view or interface can enumerate the current stage and read complete histories. An API is not assumed.",
+        "No matching text means no matching text found in the retrieved scope, not that NvDebug was never performed.",
+        "A completed historical run may belong to an earlier repair episode; matching the current requirement needs a local rule."
+      ],
+      "questions": [
+        "What makes NvDebug evidence acceptable for a Bianca order, and when must it be repeated?",
+        "Which field defines current stage, and where are the logs or attachments stored? What exactly is OC mac?"
+      ],
+      "measure": "Measure time from evidence becoming required to discovery of its absence, then to acceptable evidence and order readiness. Separately measure candidate precision and missed gaps using a manual sample. Count orders unblocked, without claiming the entire subsequent repair time as saved.",
+      "pilot": "Green-jacket personal review of a small permitted sample first. A broad recurring report needs a workflow owner and agreed access. Keep query rules and spelling variants maintained; shrink or stop the report if reviewers mostly dismiss stale matches.",
+      "index": "Pain 5/5 (estimate); rank green for personal review, sponsor for workload-wide follow-up; obnoxiousness 1/5 personal, 3/5 if it creates unowned tasks.",
+      "next": "Obtain a sanitized worklog example for needed, completed, not completed and historical NvDebug, plus the current-stage field."
+    },
+    {
+      "id": "OP02",
+      "title": "Make the refill queue explain its age",
+      "group": "Flow & handoffs",
+      "status": "Reported pain · cause unresolved",
+      "sources": [
+        18,
+        22,
+        48
+      ],
+      "updates": [
+        "U03"
+      ],
+      "text": "A unit that remains at refill for days occupies unfinished work without moving toward release. The useful first distinction is whether it is actively being processed, waiting for capacity, waiting for a prerequisite, or simply recorded at an old stage.",
+      "reasoning": "The visible wait may be a symptom of another constraint. Treating every old unit as an overdue refill could pressure the wrong team or hide required waiting. Queue age should expose the blocker, not assign blame.",
+      "improvements": [
+        "Make a daily snapshot of units recorded at refill, including actual stage-entry time where available. Keep age unknown when that event is missing; the latest comment time is not a substitute.",
+        "Separate awaiting refill, in progress, awaiting a prerequisite, intentional hold, ready to leave and stale/uncertain record. Confirm these categories with the process owner.",
+        "For a few of the oldest cases, ask what event or resource would let the unit advance. Route that question to the existing owner and record the next review point.",
+        "Compare arrivals with completions and the age distribution. If the queue keeps growing, investigate capacity or upstream release patterns rather than only expediting individual units."
+      ],
+      "report": [
+        "Current stage, stage-entry event/time, elapsed age, last meaningful progress, blocker category, next action and responsible role.",
+        "Total units, units with unknown age, agreed age bands, oldest open age, arrivals and departures over the same period."
+      ],
+      "assumptions": [
+        "Stage history exists or can be recorded going forward. Days in a stage are not automatically days of avoidable delay.",
+        "Refill and curing are distinct labels in the notes; do not merge them without evidence."
+      ],
+      "questions": [
+        "What does refill include, what must happen before and after it, and what waiting is expected?",
+        "Which timestamp starts its clock, and who can resolve each common blocker?"
+      ],
+      "measure": "Track median and upper-percentile queue age, open oldest cases and blocked time by reason, alongside completions. A faster-looking queue produced by changing a status early is not improvement.",
+      "pilot": "A personal list of a few aging cases can reveal the dominant reason. Team-wide reminders need the refill owner. Maintain reason definitions and retire alerts that repeatedly flag legitimate waiting.",
+      "index": "Pain 4/5 (estimate); green for observation, process owner for queue changes; obnoxiousness 1/5 personal, 3/5 for repeated reminders.",
+      "next": "Walk through two delayed refill cases and one ordinary case to establish what the recorded stage actually means."
+    },
+    {
+      "id": "OP03",
+      "title": "Prevent a correct action on the wrong unit",
+      "group": "Test continuity",
+      "status": "Reported pain · proposed identity cross-check",
+      "sources": [
+        22,
+        30,
+        38,
+        46
+      ],
+      "updates": [
+        "U04"
+      ],
+      "text": "Unplugging the wrong unit can interrupt someone else's test and create restart, investigation or record-reconciliation work. This is a target-selection problem even if the unplugging procedure itself is familiar.",
+      "reasoning": "Rack position, ticket identity and the physical unit can drift apart after moves. A confident location label is insufficient if the unit was relocated or the instruction was misunderstood. Prevention is most useful immediately before the physical action.",
+      "improvements": [
+        "Use the existing physical-action procedure to verify the intended unit against a unique identifier at its current location and the current task or move instruction.",
+        "A small scan-and-compare aid could display intended identity, observed identity, current recorded location, test state and holds together. Stop the comparison on mismatch, stale data or missing identity; it should not label an ambiguous match safe.",
+        "If available, show a timestamped change warning when a location recently changed occupants. Do not assume a part number uniquely identifies a unit.",
+        "Investigate confusing cable labels or handoff wording from actual near misses before adding a new software layer."
+      ],
+      "report": [
+        "Intended and observed unit match, source/time of location mapping, current test/hold information and reason for any mismatch.",
+        "Near-miss categories with no employee rankings; the event may reveal a weak shared process rather than an individual's carelessness."
+      ],
+      "assumptions": [
+        "A permitted way to read or scan a unique unit identifier is available.",
+        "A software match does not release a hold or authorize disconnection. Automatic blink, power or console actions are not part of this proposal."
+      ],
+      "questions": [
+        "Which identity check is currently required just before disconnection?",
+        "How are recent moves and holds reflected in the system used by the person unplugging the unit?"
+      ],
+      "measure": "Count wrong-unit interruptions and caught mismatches relative to physical moves, plus time added per verification. Include avoided restarts only when the counterfactual is supportable.",
+      "pilot": "Try a personal confirmation card first, then an offline comparison using synthetic identities. Maintain the mapping source; stop live reliance if location data cannot be kept current.",
+      "index": "Pain 5/5 (estimate); green for personal verification, lead for a shared procedure change; obnoxiousness 1/5 personal.",
+      "next": "Describe a non-identifying near miss from instruction to physical action and identify the last point where a mismatch could have been caught."
+    },
+    {
+      "id": "OP04",
+      "title": "Repair the SOP gaps that repeatedly stop work",
+      "group": "Diagnosis & repair",
+      "status": "Reported pain · targeted process improvement",
+      "sources": [
+        18,
+        21,
+        24,
+        29,
+        31,
+        33
+      ],
+      "updates": [
+        "U04"
+      ],
+      "text": "Weak SOPs cost time at specific decision points: which preparation applies, what output is acceptable, what to do on an exception, and who owns the next step. Rewriting every document would delay relief while the same questions continue to interrupt work.",
+      "reasoning": "The notebook contains missing steps and conflicting descriptions. Some weakness may be poor retrieval or outdated revisions; some may be a procedure that omits context an experienced technician supplies from memory.",
+      "improvements": [
+        "Record the exact point where a current task requires clarification, the relevant model/stage and the source being followed.",
+        "Choose a frequent interruption with a procedure owner. Resolve its prerequisites, expected output, exception route and next responsibility at the source.",
+        "Link the corrected section where the decision happens—for example, beside the relevant test stage or report entry—rather than expecting staff to search a whole document library.",
+        "A retrieval aid can surface that reviewed section. It should flag unsupported configurations and stale revisions rather than generate new repair instructions."
+      ],
+      "report": [
+        "Recurring question, affected task/model, current source and revision, time or rework caused, proposed correction and reviewer role.",
+        "A small list of the highest-frequency unresolved decision points, not a scorecard of authors."
+      ],
+      "assumptions": [
+        "A current owner can confirm the applicable process. The outdated error presentation may already contain material worth correcting."
+      ],
+      "questions": [
+        "Which three questions most often interrupt an experienced technician?",
+        "Is the answer absent, hard to find, ambiguous or contradicted by another source?"
+      ],
+      "measure": "Compare clarification interruptions, time to resume work and repeated errors for the corrected task. Track how quickly revisions reach the point of use.",
+      "pilot": "Correct one recurring gap with its owner. Keep revisions linked; stop creating parallel copies if they cannot stay aligned with the source.",
+      "index": "Pain 4/5 (estimate); green for documenting confusion, procedure owner for the change; obnoxiousness 1/5 personal, 3/5 for imposing new procedure.",
+      "next": "Collect one real recurring question and identify the existing instruction that should answer it."
+    },
+    {
+      "id": "OP05",
+      "title": "Make replacement decisions easier to justify",
+      "group": "Diagnosis & repair",
+      "status": "Reported pain · proposed isolation evidence aid",
+      "sources": [
+        18,
+        21,
+        32,
+        34,
+        36,
+        48
+      ],
+      "updates": [
+        "U04"
+      ],
+      "text": "Loose isolation before ordering parts can send the unit through replacement, waiting and retesting without resolving the fault. The valuable improvement is a clearer reason for the next diagnostic step or part request, not a longer mandatory checklist for every case.",
+      "reasoning": "A test label, a current observation and a suspected component are different claims. Recording the competing explanations can reveal a lower-effort check that distinguishes them before a costly replacement path is chosen.",
+      "improvements": [
+        "For a repeat failure class, record the exact symptom, relevant configuration, tests already performed, observations with times, and the hypotheses still consistent with them.",
+        "Ask the established Diagnostic owner what evidence supports the replacement and which alternatives must be considered in that scope.",
+        "Retrieve comparable resolved cases with their applicability and post-repair outcome. Similar wording alone should not select a part.",
+        "A draft aid could organize supplied evidence and flag missing decision inputs. Keep the decision with the authorized role; do not turn a junior-created report into a parts-approval gate."
+      ],
+      "report": [
+        "Observed failure and conditions, evidence for/against each candidate explanation, work already tried, approved next check, decision rationale and later outcome."
+      ],
+      "assumptions": [
+        "Some replacements are appropriately made with incomplete certainty. The objective is better decisions, not proof of every possible cause.",
+        "Replaced parts and later passing tests do not alone prove which change caused resolution when several actions occurred."
+      ],
+      "questions": [
+        "For a frequent failure, what evidence changes the choice between a new check and a replacement?",
+        "Can the current records distinguish first replacement success from repeated replacement without resolution?"
+      ],
+      "measure": "Track repeat parts orders for the same unresolved symptom, time to a useful next decision, and rework/retest burden. Compare like cases; avoid rewarding fewer orders if it prolongs repair.",
+      "pilot": "Use a personal evidence note on one recurring case type. Review whether it changes a decision. Retire fields that add effort without helping the receiver.",
+      "index": "Pain 5/5 (estimate); green for organizing own evidence, Diagnostic owner for decisions; obnoxiousness 1/5 personal, 4/5 as an imposed gate.",
+      "next": "Ask for one anonymized example where an additional observation changed the proposed part order."
+    },
+    {
+      "id": "OP06",
+      "title": "Give FRU checks a configuration-specific expectation",
+      "group": "Evidence readiness",
+      "status": "Clarified pain · proposed baseline comparison",
+      "sources": [
+        18,
+        21,
+        26,
+        44
+      ],
+      "updates": [
+        "U05"
+      ],
+      "text": "A technician can run fru and still be unable to tell whether the BMC identifies the expected components. The missing resource is a trustworthy expected result for that particular configuration, including legitimate exceptions.",
+      "reasoning": "Command output becomes actionable when it is compared with a defined expectation. Without that expectation, a missing item may be ignored or a permitted placeholder may create unnecessary investigation.",
+      "improvements": [
+        "Choose one confirmed configuration and obtain its expected component inventory and a reviewed FRU output example. A single apparently healthy unit is supporting evidence, not the entire specification.",
+        "Document how expected components appear in the actual wrapper output, including which components are represented, optional items, fields and allowed placeholders.",
+        "Compare saved outputs first. Separate expected, missing expected entry, unexpected entry, accepted exception, unsupported configuration, partial output and command/read failure.",
+        "Show the exact difference and baseline revision. Preserve source output for review; never convert missing or unparsable data into a pass."
+      ],
+      "report": [
+        "Configuration and evidence for that identification; baseline source/revision; observation time and command version.",
+        "Per expected component: observed FRU representation, mismatch/exception and explanation; unresolved coverage where a component does not have a known FRU representation."
+      ],
+      "assumptions": [
+        "The local fru wrapper's coverage and side effects are still unknown.",
+        "Inventory identification is one observation; matching FRU data does not establish functional health or replace required tests."
+      ],
+      "questions": [
+        "Which components should appear for each configuration, and which fields or dummy values are legitimate?",
+        "Does a missing entry mean absent hardware, failed reading, stale inventory or something else in this tool?"
+      ],
+      "measure": "Measure time to interpret a FRU result, reviewed false alarms and missed known omissions. Track unknown/unsupported cases separately from incorrect comparisons.",
+      "pilot": "One configuration and saved synthetic/redacted outputs first. Extend only with reviewed baselines. Maintain revision mappings; suspend comparisons when the baseline no longer applies.",
+      "index": "Pain 4/5 (estimate); green for offline reference, experienced reviewer for baselines; obnoxiousness 1/5 personal.",
+      "next": "Obtain the fru definition and one reviewed complete output with its expected inventory and allowed exceptions."
+    },
+    {
+      "id": "OP07",
+      "title": "See rack reachability without touching test state",
+      "group": "Workload visibility",
+      "status": "Structure-derived opportunity · owner-proposed blanket report",
+      "sources": [
+        16,
+        26,
+        36,
+        43,
+        46
+      ],
+      "updates": [
+        "U06"
+      ],
+      "text": "The shared rack-network access point could support a location-by-location reachability snapshot. The gain is awareness of exceptions across the workload before someone happens to inspect each location; the notes do not yet measure an existing reachability problem.",
+      "reasoning": "A blank view hides the difference between an empty location, an occupied unit with no reply, and a check that never ran. A useful sweep joins a trusted location/occupancy map to timestamped observations. It reports no ping reply rather than declaring the server down.",
+      "improvements": [
+        "Start with the permitted rack-location inventory and identify the target for each check: host OS, BMC or another endpoint. Record unmapped locations and mapping age; do not discover an arbitrary address range.",
+        "Prefer an existing fresh status source if it answers the question. If probes are needed, review their impact and pilot a small occupied scope from the stated access point.",
+        "Use bounded packet counts, timeouts, retries and concurrency set for the environment; avoid flood-style operation. Respect documented exclusions and record why a target was skipped. Do not power-cycle, clear logs, flash, configure or attach an interactive console.",
+        "Classify reply received, no reply, probe error, skipped, unmapped and unoccupied, with expected occupancy separate. A missing reply can reflect filtering or a network path problem; a reply does not prove BMC access, suite progress or server health.",
+        "Publish a snapshot first; add last-known reply and change-only reporting only if repeated snapshots prove useful and have an owner."
+      ],
+      "report": [
+        "Locations in scope, mapped/occupied/unoccupied/unknown counts, checked and skipped counts, no-reply count, probe errors and snapshot time.",
+        "Per location: target type, expected occupant association, mapping freshness, last check, observation, last-known reply and reason for skip/error. Real addresses and identifiers stay in workplace systems."
+      ],
+      "assumptions": [
+        "The access server is a possible observation point, not confirmed permission or connectivity to every target.",
+        "Read-only intent does not guarantee non-interference; probe traffic, server load and concurrent activity need review.",
+        "Expected empty slots and deliberately unavailable targets should not be presented as failed units."
+      ],
+      "questions": [
+        "Which endpoint maps to each location, and which should reply to ICMP during each unit state?",
+        "What scope, rate, concurrency and exclusions can coexist with active tests and technicians' work?"
+      ],
+      "measure": "Measure time to notice a useful exception and reviewer-confirmed actionable fraction. Track skipped/unmapped coverage and probe overhead so a quiet report does not falsely imply complete visibility.",
+      "pilot": "Begin with a manually requested snapshot of a small permitted rack scope. Stop if the probe changes observed test behavior or creates excessive noise. Keep mappings and exclusions owned.",
+      "index": "Pain unknown (opportunity); green for synthetic report design, network/test owner for live scope; obnoxiousness 1/5 personal, 2/5 as an opt-in snapshot.",
+      "external": [
+        {
+          "title": "iputils ping manual: ICMP echo, bounded counts and timeouts",
+          "url": "https://man7.org/linux/man-pages/man8/ping.8.html"
+        }
+      ],
+      "next": "Document one rack's authoritative location/occupancy source and the approved endpoint and observation method."
+    },
+    {
+      "id": "OP08",
+      "title": "Separate a running test from a test making progress",
+      "group": "Test continuity",
+      "status": "Structure-derived opportunity · stalled-work hypothesis",
+      "sources": [
+        33,
+        43,
+        46,
+        47
+      ],
+      "updates": [
+        "U06"
+      ],
+      "text": "A workload view might show a unit as testing long after it stopped producing useful progress. Conversely, a long legitimate stage can look stalled if all stages are judged against one clock. A progress-exception report could make the distinction easier to investigate.",
+      "reasoning": "Reachability and test progress answer different questions. Pairing the current stage with its last meaningful progress event may reveal unattended waits without disturbing a technician's console session.",
+      "improvements": [
+        "Use existing test events or a permitted status export rather than launching another test or entering an active session.",
+        "Show stage start, latest meaningful progress, current status and known holds together. Distinguish missing telemetry from no progress.",
+        "Build expectations from comparable stage/configuration observations reviewed by the test owner. Do not use the notebook's rough durations as alarm limits.",
+        "Offer candidates for review, including manual steps awaiting input, with no automatic restart or failure decision."
+      ],
+      "report": [
+        "Active test count, progress timestamp coverage, stage age, no-progress age, hold context and the event supporting each candidate."
+      ],
+      "assumptions": [
+        "A current Testing label may be stale; log-writing frequency may also differ from actual progress.",
+        "Meaningful progress and legitimate quiet intervals have not been defined."
+      ],
+      "questions": [
+        "Which event proves each stage has progressed, and which stages legitimately stay quiet?",
+        "How are manual-test waits, pauses and intentional holds represented?"
+      ],
+      "measure": "Track reviewed unattended waits found, time to the next appropriate action, false alerts and time spent reviewing. Do not claim every long test as lost time.",
+      "pilot": "Review a few saved cases and their event timelines with a lead. Keep stage-specific rules maintained and withdraw them when telemetry changes.",
+      "index": "Pain unknown (hypothesis); green for retrospective review, test owner for shared alerts; obnoxiousness 2/5 if opt-in.",
+      "next": "Identify one stage with a reliable progress signal and compare an ordinary long run with a genuinely blocked one."
+    },
+    {
+      "id": "OP09",
+      "title": "Find disagreements between the ticket and the rack",
+      "group": "Flow & handoffs",
+      "status": "Structure-derived opportunity · reconciliation report",
+      "sources": [
+        17,
+        25,
+        30,
+        33,
+        38,
+        39,
+        46
+      ],
+      "updates": [
+        "U06"
+      ],
+      "text": "ServiceMe, Fusion Eye, the Traveler and trackers represent different aspects of the same unit. A read-only comparison could expose cases where a physical move or stage change did not reach every record, improving both handoffs and target selection.",
+      "reasoning": "More reporting helps only if it reconciles existing sources rather than becoming another unowned truth. Disagreement should identify the two claims and their times; the report should not choose whichever system was queried last.",
+      "improvements": [
+        "Define the authoritative source for identity, location, test state, process stage and holds; these may have different owners.",
+        "Join records through a stable permitted identity and retain retrieval times. Flag missing joins, multiple active locations and contradictory stage/location claims.",
+        "Allow the normal update delay to be reviewed before treating a discrepancy as actionable. Send a candidate to the existing record owner; do not overwrite systems automatically."
+      ],
+      "report": [
+        "Unit association within the workplace, each conflicting claim and source/time, last move/change when available, review state and owning role."
+      ],
+      "assumptions": [
+        "A reliable cross-system key and permitted reads exist. Clock differences and asynchronous updates may create temporary discrepancies."
+      ],
+      "questions": [
+        "Which source owns each field, and how long does an ordinary move take to appear everywhere?",
+        "What distinguishes multiple valid records from a duplicate or stale location?"
+      ],
+      "measure": "Count reviewed stale records corrected and related wrong-location interruptions, while tracking temporary disagreements dismissed.",
+      "pilot": "Compare one handoff manually, then a small saved-data snapshot. Keep join and ownership rules current; stop if unresolved identity collisions dominate.",
+      "index": "Pain 4/5 (estimate from handoff risks); green for review, source owners for corrections; obnoxiousness 2/5.",
+      "next": "Map one unit's identity, stage, location and hold fields across the existing systems using synthetic values."
+    },
+    {
+      "id": "OP10",
+      "title": "Recognize repeated failure without repeating the same investigation",
+      "group": "Diagnosis & repair",
+      "status": "Structure-derived opportunity · repeat-work report",
+      "sources": [
+        18,
+        22,
+        31,
+        32,
+        34,
+        48
+      ],
+      "updates": [
+        "U04"
+      ],
+      "text": "A unit may return to a similar failure after a part change or another suite. Seeing the sequence of changes and results could prevent repeating an already unhelpful check or ordering another part without learning from the previous attempt.",
+      "reasoning": "A repeated error string is not automatically the same fault. Grouping should preserve configuration, stage, timing and changes so the next investigator can assess whether the cases are comparable.",
+      "improvements": [
+        "For an active repair episode, assemble tests and component changes in chronological order from existing records.",
+        "Highlight repeated exact failure signatures separately from broader text similarities; preserve the original wording.",
+        "Show what changed between attempts and what evidence is missing. A human reviewer decides whether the result suggests a new hypothesis, a repeated condition or an unrelated failure."
+      ],
+      "report": [
+        "Repair episode, configuration, test/stage, failure signature, action between tests, outcome and supporting history references."
+      ],
+      "assumptions": [
+        "A repair episode boundary and comparable test context can be identified. Several simultaneous changes prevent simple attribution."
+      ],
+      "questions": [
+        "When does a repeated failure count as the same unresolved issue?",
+        "Which required reruns are valuable confirmation rather than avoidable repetition?"
+      ],
+      "measure": "Measure time spent reconstructing history, duplicate checks avoided and recurrence after intervention. Do not reward reducing required tests.",
+      "pilot": "Use one recurring failure family and synthetic timelines. Maintain signature normalization carefully; stop broad grouping if it conflates unrelated failures.",
+      "index": "Pain 4/5 (estimate); green for personal timeline, Diagnostic owner for changed actions; obnoxiousness 1/5.",
+      "next": "Compare two repeat-failure histories and ask what detail would have changed the second investigation."
+    },
+    {
+      "id": "OP11",
+      "title": "A daily exception view should end in a useful next action",
+      "group": "Workload visibility",
+      "status": "Synthesis · proposed workload digest",
+      "sources": [
+        18,
+        22,
+        30,
+        35,
+        38,
+        46
+      ],
+      "updates": [
+        "U02",
+        "U03",
+        "U06"
+      ],
+      "text": "The strongest blanket report may be a short view of units that need attention for different reasons: missing order evidence, refill blockers, an unexpected lack of reply, stale location records or a stalled manual step. Its value is deciding what deserves a closer look across the workload.",
+      "reasoning": "Holistic clarity can be valuable before its absence feels painful. But combining reports can also multiply the same unit into many alerts. A useful digest groups related findings by unit and separates facts from candidate explanations.",
+      "improvements": [
+        "Reuse the existing records and proposed report outputs; do not ask every team to maintain another full ticket history.",
+        "Show one unit with multiple reasons where identity is reliable, plus evidence freshness, current stage, blocker and next responsible role. Keep uncertain joins separate.",
+        "Order reviewed cases by the work they block and the action that can actually be taken. Present unknowns and coverage gaps rather than hiding them under a green total.",
+        "Let users request the snapshot first. Add reminders only for agreed actionable conditions, suppress unchanged duplicates, and close an item only when its source confirms resolution."
+      ],
+      "report": [
+        "Coverage and as-of time; unique units needing review; candidate versus confirmed blockers; grouped reasons; available next action and source links."
+      ],
+      "assumptions": [
+        "Someone can act on the output. A list without ownership can become a second queue of unattended work.",
+        "No-response, missing-keyword and stale-telemetry findings do not carry equivalent certainty."
+      ],
+      "questions": [
+        "Which exceptions can Testing resolve itself, and which need another team?",
+        "What is the smallest daily report someone would voluntarily consult and act on?"
+      ],
+      "measure": "Track useful findings acted on, time from detection to action, duplicate alerts avoided and review effort. Keep acknowledgment separate from actual resolution.",
+      "pilot": "A personal digest first, with voluntary feedback from a receiver. Give any shared version an owner and expiry rules; retire categories that produce no useful action.",
+      "index": "Pain unknown for missing overview; green for personal digest, sponsor for coordinated follow-up; obnoxiousness 1/5 personal, 3/5 if it creates obligations.",
+      "next": "Choose two report categories with known data and an available next action; compare the digest with the current way of noticing them."
+    },
+    {
+      "id": "OP12",
+      "title": "Choose relief by the repair delay it can actually remove",
+      "group": "Flow & handoffs",
+      "status": "Planning estimate · priorities to validate",
+      "sources": [
+        18,
+        22,
+        34,
+        38,
+        47
+      ],
+      "updates": [
+        "U02",
+        "U03",
+        "U04",
+        "U05",
+        "U06"
+      ],
+      "text": "The most visible automation is not necessarily the most useful intervention. Missing NvDebug evidence may block an order outright; wrong-unit disconnection can destroy useful test time; a reachability sweep may improve awareness without yet demonstrating a recurring loss. Those are different reasons to invest.",
+      "reasoning": "A sensible first order is to investigate a known blocker or costly error with a short path to action, while trying low-effort visibility reports that can expose additional losses. This is a proposed priority, not a ranking backed by measured incident rates.",
+      "improvements": [
+        "Compare each idea by how often the condition occurs, the avoidable delay or rework per case, confidence in that estimate, effort to review findings and upkeep.",
+        "Begin with a small NvDebug gap review and a wrong-unit near-miss walkthrough. Check a few refill waits and FRU ambiguities next; these may reveal simple process fixes.",
+        "Pilot a bounded workload snapshot when its mappings and outputs are understood. Expand based on useful actions and measured non-interference, not on the number of units scanned."
+      ],
+      "report": [
+        "For each candidate: reported occurrence, expected benefit mechanism, confidence, data readiness, next responsible role, trial effort and stop condition."
+      ],
+      "assumptions": [
+        "Delay may move to another constrained stage after one blocker is relieved; saved elapsed time and saved technician effort are different quantities."
+      ],
+      "questions": [
+        "Which recurring condition currently prevents the next necessary action?",
+        "After it is resolved, does the unit advance sooner, or simply wait somewhere else?"
+      ],
+      "measure": "Hypothetical arithmetic only: if 6 confirmed gaps each take 5 minutes to find manually, a report taking 8 minutes to review saves 22 minutes of discovery effort before upkeep. It does not prove 22 minutes more throughput or that every candidate is a confirmed gap.",
+      "pilot": "Use a small time-bounded comparison with similar cases and no coworker ranking. Keep only improvements whose repeated benefit exceeds review and maintenance effort.",
+      "index": "Planning judgment; green for a personal comparison, process owner for reallocating team work; obnoxiousness 1/5.",
+      "next": "Measure one delay from condition arising to discovery, action and next-stage progress, rather than timing only the report."
+    }
+  ],
+  "introspection": [
+    {
       "id": "A01",
       "group": "Learning",
       "title": "Names → locations → connections",
@@ -1731,6 +2216,43 @@ window.TRINITY_NOTES = {
         44
       ],
       "next": "Choose one component and connect its role, interfaces, observable signals and limits using a trusted source."
+    }
+  ],
+  "ownerUpdates": [
+    {
+      "id": "U01",
+      "text": "Analysis should examine company operations, reported pain points and opportunities inferred from the system structure. Preserve the previous Analysis as Introspection. Notes already matches the intended direction.",
+      "status": "Owner-confirmed product intent"
+    },
+    {
+      "id": "U02",
+      "text": "Some technicians omit NvDebug on Bianca cases. The owner reports this is a necessary step for ordering Biancas, and that finding units needing it in ServiceMe is difficult. A proposed report would search worklogs for units currently in Diagnostic, Repair or Testing for Bianca/NvDebug mentions, with counts and identifying fields available only inside the workplace.",
+      "status": "Owner-reported operational clarification; exact evidence/acceptance rules still open"
+    },
+    {
+      "id": "U03",
+      "text": "Units can remain at refill for days. This is a reported delay; its causes, frequency and expected processing or waiting times have not been established.",
+      "status": "Owner-reported pain point"
+    },
+    {
+      "id": "U04",
+      "text": "Unplugging the wrong racked unit, weak SOPs and insufficient isolation before ordering replacement parts are reported operational pain points.",
+      "status": "Owner-reported pain points"
+    },
+    {
+      "id": "U05",
+      "text": "Not knowing what FRU data should look like means lacking an expected baseline when using the fru command to check whether BMC identifies the components by their FRU data.",
+      "status": "Owner clarification of intended meaning; baseline and command coverage still open"
+    },
+    {
+      "id": "U06",
+      "text": "Access to servers being tested is through a server on the test-rack network. A proposed script could check every rack location and report locations without a ping reply. Similar non-disruptive reports could improve visibility across the workload even without a previously recorded pain point.",
+      "status": "Owner-reported access structure and proposed opportunity; target mapping and probe impact unverified"
+    },
+    {
+      "id": "U07",
+      "text": "The proposed NvDebug report fields include ticket number, service tag, OC mac and possibly worklogs. OC mac is retained exactly as supplied; it has not been identified as OS MAC or another address field.",
+      "status": "Owner-proposed report fields; one field name remains ambiguous"
     }
   ],
   "traveler": {

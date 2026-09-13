@@ -1,0 +1,37 @@
+[
+  {
+    "id": "U01",
+    "text": "Analysis should examine company operations, reported pain points and opportunities inferred from the system structure. Preserve the previous Analysis as Introspection. Notes already matches the intended direction.",
+    "status": "Owner-confirmed product intent"
+  },
+  {
+    "id": "U02",
+    "text": "Some technicians omit NvDebug on Bianca cases. The owner reports this is a necessary step for ordering Biancas, and that finding units needing it in ServiceMe is difficult. A proposed report would search worklogs for units currently in Diagnostic, Repair or Testing for Bianca/NvDebug mentions, with counts and identifying fields available only inside the workplace.",
+    "status": "Owner-reported operational clarification; exact evidence/acceptance rules still open"
+  },
+  {
+    "id": "U03",
+    "text": "Units can remain at refill for days. This is a reported delay; its causes, frequency and expected processing or waiting times have not been established.",
+    "status": "Owner-reported pain point"
+  },
+  {
+    "id": "U04",
+    "text": "Unplugging the wrong racked unit, weak SOPs and insufficient isolation before ordering replacement parts are reported operational pain points.",
+    "status": "Owner-reported pain points"
+  },
+  {
+    "id": "U05",
+    "text": "Not knowing what FRU data should look like means lacking an expected baseline when using the fru command to check whether BMC identifies the components by their FRU data.",
+    "status": "Owner clarification of intended meaning; baseline and command coverage still open"
+  },
+  {
+    "id": "U06",
+    "text": "Access to servers being tested is through a server on the test-rack network. A proposed script could check every rack location and report locations without a ping reply. Similar non-disruptive reports could improve visibility across the workload even without a previously recorded pain point.",
+    "status": "Owner-reported access structure and proposed opportunity; target mapping and probe impact unverified"
+  },
+  {
+    "id": "U07",
+    "text": "The proposed NvDebug report fields include ticket number, service tag, OC mac and possibly worklogs. OC mac is retained exactly as supplied; it has not been identified as OS MAC or another address field.",
+    "status": "Owner-proposed report fields; one field name remains ambiguous"
+  }
+]

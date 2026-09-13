@@ -2,7 +2,7 @@
 
 Edition: 2026-09-13. **All local operational claims remain reported / unverified.**
 
-Start with the [chronological reading edition](narrative.md), [reference map and process studies](reference.md), or [Analysis](analysis.md). The [HTML notebook](../site/index.html) presents the same operational content with numbered page navigation, topic views and search.
+Start with the [chronological reading edition](narrative.md), [reference map and process studies](reference.md), [operations Analysis](analysis.md), or [Introspection](introspection.md). The [HTML notebook](../site/index.html) presents the same operational content with numbered page navigation, topic views and search.
 
 ## Coverage and editorial method
 
@@ -15,7 +15,7 @@ Start with the [chronological reading edition](narrative.md), [reference map and
 - Transcription flags are editorial. Narrative bullets are revised learning prose. Reference cards are a synthesis. Analysis entries are explicitly interpretations, questions, hypotheses or proposals.
 - Later notes do not automatically override earlier ones. The FLA/FLC definitions and reversed codes, clear-command syntax, backplane routes and stage/Run-In questions remain visible.
 
-The [owner mailbox](../owner_mailbox/CLARIFICATION.md) contains 20 focused questions, tentative interpretations and the benefit of resolving each.
+The [owner mailbox](../owner_mailbox/CLARIFICATION.md) retains the original questions, records seven owner clarifications, and adds C21–C28 for the operations proposals. C09 is partially resolved.
 
 ## Content and presentation
 
@@ -25,7 +25,9 @@ The [owner mailbox](../owner_mailbox/CLARIFICATION.md) contains 20 focused quest
 | [source-inventory.json](source-inventory.json) | Filename, size, checksum and disposition for each source; no source images. |
 | [narrative.json](narrative.json) | Revised page titles and bullets in chronological source order. |
 | [reference.json](reference.json) | Topic membership, synthesis cards and incomplete process studies. |
-| [analysis.json](analysis.json) | Assistant analysis with source references and next questions. |
+| [analysis.json](analysis.json) | Twelve company-operations analyses: pain points, proposed relief, report scope, assumptions, trials and value checks. |
+| [introspection.json](introspection.json) | The former 32-entry Analysis, preserved with its original IDs. |
+| [owner-updates.json](owner-updates.json) | Owner clarifications used as a separate source layer for operations Analysis. |
 | [random-notes.txt](random-notes.txt) | Unrelated P015 material; repository only. |
 | [../scripts/build-notes.mjs](../scripts/build-notes.mjs) | Builds Markdown editions and the site's explicit operational dataset. |
 
@@ -42,3 +44,8 @@ A public repository exposes its repository-only documents too. Excluding random 
 Resolve one mailbox question with a source and scope. Update the matching synthesis and narrative qualification while retaining the original transcription. Check that the change still preserves uncertainty elsewhere. Additional artwork is optional; verified component references and corrected source text are higher-value next inputs than decorative imagery.
 
 Read the [release verification](VERIFICATION.md) for checks, coverage and remaining limitations.
+
+
+## Analysis and Introspection
+
+Analysis addresses company operations, including reported pain points and opportunities inferred from the shared system structure. Introspection retains the earlier reflections on learning, reasoning and tool-development values. Old A-series Analysis entry bookmarks and old group bookmarks still open the corresponding Introspection content. The bare Analysis tab now opens operations. Notes remains the original learning narrative and reference.

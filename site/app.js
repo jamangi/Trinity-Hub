@@ -19,7 +19,7 @@ function nav(section,topic) {
     if(el.dataset.section===section) el.setAttribute("aria-current","page");
     else el.removeAttribute("aria-current");
   });
-  sections.innerHTML = section==="analysis" ? link("#analysis","All analysis",!topic)+[...new Set(data.analysis.map(a=>a.group))].map(g=>link("#analysis/"+encodeURIComponent(g),g,topic===g)).join("") : link("#notes/narrative/1","Narrative",topic==="narrative")+data.topics.map(t=>link("#notes/"+t.id,t.title,topic===t.id)).join("")+link("#notes/processes","Process studies",topic==="processes")+link("#notes/traveler","Traveler anatomy",topic==="traveler");
+  sections.innerHTML = ["analysis","introspection"].includes(section) ? link("#"+section,section==="analysis"?"All operations analysis":"All introspection",!topic)+[...new Set(data[section].map(a=>a.group))].map(g=>link("#"+section+"/"+encodeURIComponent(g),g,topic===g)).join("") : link("#notes/narrative/1","Narrative",topic==="narrative")+data.topics.map(t=>link("#notes/"+t.id,t.title,topic===t.id)).join("")+link("#notes/processes","Process studies",topic==="processes")+link("#notes/traveler","Traveler anatomy",topic==="traveler");
 }
 function renderPage(n) {
   const page=pageById(n)||data.pages[0];
@@ -43,18 +43,26 @@ function renderGuides(id) {
 function renderTraveler() {
   main.innerHTML='<p class="eyebrow">Notes / Record anatomy</p><h2>The Traveler carries the case.</h2><p class="lead">A field map derived from P048 and the separate illustrated reference T01. Example identities, customer labels, codes and original images are excluded.</p><article class="sheet"><h3>Identity and context</h3>'+bullets(["Received date, country, model/configuration, part number and receiving status.","Unit-matching fields: serial number, service tag, depot number and SR number. Values stay in workplace systems.","Machine model and accessories provide additional context."])+'<h3>Account of the work</h3>'+bullets(["Customer failure description preserves the reported symptom.","Repair notice records actions taken. An action is not proof that the fault was resolved.","Inspection, Pre scan, Diagnostic, Repair, Leak test, Refill, TIM curing, QC and OBA have Pass/Fail and failure-comment areas in T01."])+'<div class="note-box"><strong>Still unknown</strong><p>The current form revision, row owners, optional stages, abbreviations and relationship between row order and actual routing need confirmation.</p></div>'+sources([48])+sourceDetail(data.traveler)+'</article>';
 }
+function renderIntrospection(group) {
+  const entries=group?data.introspection.filter(a=>a.group===group):data.introspection;
+  main.innerHTML='<p class="eyebrow">SIFT / Introspection</p><h2>Questions that make<br>the system clearer.</h2><p class="lead">Interpretations, hypotheses and proposals derived from the notes. No measured savings, confirmed diagnoses or personality assessments are implied.</p>'+entries.map(a=>'<article class="card" id="'+a.id+'"><span class="status">'+esc(a.id+" · "+a.group+" · "+a.status)+'</span><h3>'+esc(a.title)+'</h3><p>'+esc(a.text)+'</p><p class="next"><strong>Next useful step:</strong> '+esc(a.next)+'</p>'+sources(a.sources)+'</article>').join("");
+  if(!entries.length) main.innerHTML+='<p class="empty">No introspection group found. '+link("#introspection","View all introspection")+'</p>';
+}
 function renderAnalysis(group) {
   const entries=group?data.analysis.filter(a=>a.group===group):data.analysis;
-  main.innerHTML='<p class="eyebrow">SIFT / Analysis</p><h2>Questions that make<br>the system clearer.</h2><p class="lead">Interpretations, hypotheses and proposals derived from the notes. No measured savings, confirmed diagnoses or personality assessments are implied.</p>'+entries.map(a=>'<article class="card" id="'+a.id+'"><span class="status">'+esc(a.id+" · "+a.group+" · "+a.status)+'</span><h3>'+esc(a.title)+'</h3><p>'+esc(a.text)+'</p><p class="next"><strong>Next useful step:</strong> '+esc(a.next)+'</p>'+sources(a.sources)+'</article>').join("");
-  if(!entries.length) main.innerHTML+='<p class="empty">No analysis group found. '+link("#analysis","View all analysis")+'</p>';
+  const block=(title,items)=>"<h4>"+esc(title)+"</h4>"+bullets(items);
+  main.innerHTML='<p class="eyebrow">Analysis / Company operations</p><h2>Where can the work move forward?</h2><p class="lead">Relieve known pain points and uncover useful exceptions across the workload. Each idea connects an operational condition to a possible improvement, a small trial, and evidence that it helps.</p><p class="source-label">Reported conditions · proposed improvements · no live scripts or measured savings</p>'+entries.map(a=>'<article class="card" id="'+a.id+'"><span class="status">'+esc(a.id+" · "+a.group+" · "+a.status)+'</span><h3>'+link("#analysis/"+encodeURIComponent(a.group)+"/"+a.id,a.title)+'</h3><p>'+esc(a.text)+'</p><p>'+esc(a.reasoning)+'</p><p class="next"><strong>Next useful step:</strong> '+esc(a.next)+'</p><details><summary>Improvement plan &amp; evidence needed</summary>'+block("Possible improvement",a.improvements)+block("What the report or aid would show",a.report)+block("Assumptions and limits",a.assumptions)+block("Open questions",a.questions)+'<h4>Evidence of benefit</h4><p>'+esc(a.measure)+'</p><h4>First scope and maintenance</h4><p>'+esc(a.pilot)+'</p><p class="source-label">Machiavellian Index — planning estimate: '+esc(a.index)+'</p></details>'+sources(a.sources)+'<details><summary>Owner clarifications behind this idea</summary>'+a.updates.map(id=>{const u=data.ownerUpdates.find(u=>u.id===id);return '<p><strong>'+esc(id+" · "+u.status)+'</strong></p><p>'+esc(u.text)+'</p>';}).join("")+'</details>'+(a.external?'<p class="source-label">Technical reference: '+a.external.map(e=>link(e.url,e.title)).join(", ")+'</p>':"")+'</article>').join("");
+  if(!entries.length) main.innerHTML+='<p class="empty">No operations group found. '+link("#analysis","View all operations analysis")+'</p>';
 }
+
 function searchRecords(query) {
   const terms=query.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
   const records=[
     ...data.pages.map(p=>({type:"Note · P"+String(p.n).padStart(3,"0"),title:p.title,body:[...p.bullets,p.text,...p.flags].join(" "),href:pageHref(p.n)})),
     ...data.topics.flatMap(t=>t.cards.map(([title,text])=>({type:"Reference · "+t.title,title,body:text,href:"#notes/"+t.id}))),
     ...data.guides.map(g=>({type:"Process study",title:g.title,body:[g.purpose,...g.steps,...g.gaps].join(" "),href:"#notes/processes/"+g.id})),
-    ...data.analysis.map(a=>({type:"Analysis · "+a.status,title:a.title,body:a.text+" "+a.next,href:"#analysis/"+encodeURIComponent(a.group)+"/"+a.id})),
+    ...data.analysis.map(a=>({type:"Analysis · "+a.status,title:a.title,body:[a.text,a.reasoning,a.next,...a.improvements,...a.report,...a.assumptions,...a.questions,a.measure,a.pilot,a.index,...a.updates.map(id=>data.ownerUpdates.find(u=>u.id===id).text)].join(" "),href:"#analysis/"+encodeURIComponent(a.group)+"/"+a.id})),
+    ...data.introspection.map(a=>({type:"Introspection · "+a.status,title:a.title,body:a.text+" "+a.next,href:"#introspection/"+encodeURIComponent(a.group)+"/"+a.id})),
     {type:"Reference · T01",title:"Traveler anatomy",body:data.traveler.text,href:"#notes/traveler"}
   ];
   return terms.length?records.filter(r=>terms.every(term=>(r.title+" "+r.body).toLocaleLowerCase().includes(term))):[];
@@ -62,7 +70,9 @@ function searchRecords(query) {
 function render() {
   let parts;
   try {parts=decodeURIComponent(location.hash.slice(1)).split("/");} catch {parts=[];}
-  const section=parts[0]==="analysis"?"analysis":"notes";
+  let section=["analysis","introspection"].includes(parts[0])?parts[0]:"notes";
+  // Preserve old Analysis group and A-series entry bookmarks after the rename.
+  if(section==="analysis" && (/^A\d+$/.test(parts[2]||"") || (data.introspection.some(a=>a.group===parts[1]) && !data.analysis.some(a=>a.group===parts[1])))) section="introspection";
   const topic=parts[1]||(section==="notes"?"narrative":"");
   nav(section,topic);
   const query=search.value.trim();
@@ -70,18 +80,19 @@ function render() {
   if(query){
     const results=searchRecords(query);
     count.textContent=results.length+" results";
-    main.innerHTML='<p class="eyebrow">Search / Entire notebook</p><h2>Find a useful connection.</h2><p class="lead">Results for “'+esc(query)+'” across notes, reference, process studies and analysis.</p>'+results.map(r=>'<a class="result" href="'+esc(r.href)+'"><small>'+esc(r.type)+'</small><h3>'+esc(r.title)+'</h3><p>'+esc(r.body.slice(0,200))+'…</p></a>').join("");
+    main.innerHTML='<p class="eyebrow">Search / Entire notebook</p><h2>Find a useful connection.</h2><p class="lead">Results for “'+esc(query)+'” across notes, reference, process studies, operations analysis and introspection.</p>'+results.map(r=>'<a class="result" href="'+esc(r.href)+'"><small>'+esc(r.type)+'</small><h3>'+esc(r.title)+'</h3><p>'+esc(r.body.slice(0,200))+'…</p></a>').join("");
     if(!results.length)main.innerHTML+='<p class="empty">No matching entry. Try a component name or fewer words. The source set is incomplete; absence here does not mean no answer exists.</p>';
     return;
   }
   count.textContent="";
   if(section==="analysis")renderAnalysis(topic);
+  else if(section==="introspection")renderIntrospection(topic);
   else if(topic==="narrative")renderPage(parts[2]);
   else if(topic==="processes")renderGuides(parts[2]);
   else if(topic==="traveler")renderTraveler();
   else renderTopic(topic);
   document.title=(main.querySelector("h2")?.textContent||"Field Notes")+" · Trinity Hub";
-  if(section==="analysis" && /^A\d+$/.test(parts[2]||"")) document.getElementById(parts[2])?.scrollIntoView();
+  if(["analysis","introspection"].includes(section) && /^(?:A|OP)\d+$/.test(parts[2]||"")) document.getElementById(parts[2])?.scrollIntoView();
 }
 search.addEventListener("input",render);
 clearSearch.addEventListener("click",()=>{search.value="";render();search.focus();});

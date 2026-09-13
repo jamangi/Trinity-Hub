@@ -68,7 +68,7 @@ Hardware lists, test meanings, routes, access, and ideas are expected to change.
 | [owner_mailbox/](owner_mailbox/CLARIFICATION.md) | Focused clarification questions with tentative interpretations. |
 | [print/](print/README.md) | A local, black-and-white workbook with individually printable conversation and gathering sheets. |
 
-The repository now includes a [sourced field notebook](notes/README.md) and [HTML reading site](site/index.html), alongside plans, templates and the printable workbook. The notebook preserves a chronological learning narrative, a topic reference and a separate Analysis area. Operational claims remain provisional. No diagnostic automation or live workplace integrations have been implemented.
+The repository now includes a [sourced field notebook](notes/README.md) and [HTML reading site](site/index.html), alongside plans, templates and the printable workbook. The notebook preserves a chronological learning narrative, a topic reference, an operations-focused Analysis area, and Introspection for the earlier reflections on learning and reasoning. Operational claims remain provisional. No diagnostic automation or live workplace integrations have been implemented.
 
 ## Latest knowledge intake
 
