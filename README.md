@@ -1,5 +1,7 @@
 # Trinity Hub
 
+[Open the field notebook](https://jamangi.github.io/Trinity-Hub/) · [Release verification](notes/VERIFICATION.md)
+
 Trinity Hub is a living workshop for learning server repair, improving testing work, and building useful tools with **SIFT**, our fictional AI assistant. Its purpose is to help a new associate become competent, comfortable, and trusted while helping more units return to service each day.
 
 We borrow vocabulary and atmosphere from the Server Repair story. The fantasy gives us a satisfying language for thinking about work; this is an independent productivity project, not an extension of the game. **Server Repair is a read-only reference. All work for this project belongs here.**

@@ -40,3 +40,5 @@ A public repository exposes its repository-only documents too. Excluding random 
 ## Next useful revision
 
 Resolve one mailbox question with a source and scope. Update the matching synthesis and narrative qualification while retaining the original transcription. Check that the change still preserves uncertainty elsewhere. Additional artwork is optional; verified component references and corrected source text are higher-value next inputs than decorative imagery.
+
+Read the [release verification](VERIFICATION.md) for checks, coverage and remaining limitations.
