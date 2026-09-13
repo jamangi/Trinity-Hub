@@ -1,0 +1,15 @@
+Repository-only random notes
+Source: 15.jpg (P015), chronological source position 15.
+Excluded from the site and its search index. A public repository still exposes this file.
+
+AI training / audiobooks
+
+Knowledge Consolidation:
+- Have A.I. read a book, then read another book given the info from the book.
+- Make stock program.
+  - Identity: You have X experience [X-like mark uncertain].
+  - Ask it ways to monitor the trades.
+  - Ask it to generate the trading app.
+  - Ask it to combine the apps.
+
+Unrelated AI/book/trading ideas: repository-only random notes.

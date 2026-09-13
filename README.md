@@ -61,6 +61,15 @@ Hardware lists, test meanings, routes, access, and ideas are expected to change.
 | [buildorders/](buildorders/README.md) | Prioritized tool plans, dependencies, SIFT prompts, adoption limits, and success checks. |
 | [context/](context/README.md) | Working observations, terminology, fiction boundary, and unanswered questions. |
 | [templates/](templates/README.md) | Reusable blank notes for gathering evidence and drafting knowledge. |
+| [notes/](notes/README.md) | Redacted reading transcriptions, chronological learning notes, reference material and analysis. |
+| [site/](site/README.md) | Searchable HTML field notebook, published through GitHub Pages. |
+| [owner_mailbox/](owner_mailbox/CLARIFICATION.md) | Focused clarification questions with tentative interpretations. |
 | [print/](print/README.md) | A local, black-and-white workbook with individually printable conversation and gathering sheets. |
 
-This repository currently contains plans, templates, and a local printable workbook. No diagnostic commands, live integrations, or shared applications have been implemented.
+The repository now includes a [sourced field notebook](notes/README.md) and [HTML reading site](site/index.html), alongside plans, templates and the printable workbook. The notebook preserves a chronological learning narrative, a topic reference and a separate Analysis area. Operational claims remain provisional. No diagnostic automation or live workplace integrations have been implemented.
+
+## Latest knowledge intake
+
+The 2026-09-13 image review covers 48 numbered note photographs and one illustrated Traveler. Read the [consolidation guide](notes/README.md) for source coverage and editorial boundaries. Later notes refine earlier impressions: for example, an outdated error/SOP reference was found after the initial impression that no list existed. [Open clarifications](owner_mailbox/CLARIFICATION.md) retain conflicts rather than turning later recollections into confirmed facts.
+
+The site presents operational study material. Build orders and unrelated notes stay outside the deployed site; a public Git repository still exposes those repository files. Original images and identifying values are excluded.

@@ -1,0 +1,398 @@
+{
+  "reviewed": "2026-09-13",
+  "order": "Numeric filename order supplied by owner; note-taking dates unknown",
+  "images": [
+    {
+      "id": "P001",
+      "filename": "1.jpg",
+      "bytes": 3936387,
+      "sha256": "a38410181b80ba11f58c48ae0de4f336568e4e21d9796bda3f1dc82e484cd3c2",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P002",
+      "filename": "2.jpg",
+      "bytes": 4148299,
+      "sha256": "4fcf25c91ae6fbd874c82bea7d8df2b128d0845875547ba050b0d9e2bc3aecb6",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P003",
+      "filename": "3.jpg",
+      "bytes": 3770708,
+      "sha256": "486f3c15b79eca43cbc303e5310fa79e9e25a979556b2fdf138fc96bc64761a7",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P004",
+      "filename": "4.jpg",
+      "bytes": 4040540,
+      "sha256": "856bb9e47cdd33ed23b5a7d2bbfd14526406239d0a65c0a34857d8704518025a",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P005",
+      "filename": "5.jpg",
+      "bytes": 3990189,
+      "sha256": "1b6958ccc4e6324703ae50ea85ef03895f9ec859bf79f2e96ed727e8e503a09f",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P006",
+      "filename": "6.jpg",
+      "bytes": 4063197,
+      "sha256": "6b7be2e4c2d5992489833f9fd6885b9176e4b2259440cb0408a1bfafa0b7ec91",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P007",
+      "filename": "7.jpg",
+      "bytes": 4083353,
+      "sha256": "7bd499945564b9b76724162698f97166c4a5e770b34724c88e8fde7f179a5b13",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P008",
+      "filename": "8.jpg",
+      "bytes": 4162426,
+      "sha256": "7d23bdb218ac5b1f551ed28414bd7b738d1f0f9ea386ddf88f2ad8ec340b6bb7",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P009",
+      "filename": "9.jpg",
+      "bytes": 4002272,
+      "sha256": "fcf240747e3dae0b06ff872668b5e7fc5aab0c493c3f0c3a2decc64bf5f9924a",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P010",
+      "filename": "10.jpg",
+      "bytes": 5160051,
+      "sha256": "be70762cbc9b05430dfdc09ee44de84215212bf5763489d8b3cae05c428734f2",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P011",
+      "filename": "11.jpg",
+      "bytes": 4956886,
+      "sha256": "85d941332f994519f37fe2f3024f29b2adc2462aaeea9667f37f3ac36103db71",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P012",
+      "filename": "12.jpg",
+      "bytes": 4461834,
+      "sha256": "549f496f202a95821e2c7ea51c67ea00d3387178a2e9d41e33bbd5203aef094b",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P013",
+      "filename": "13.jpg",
+      "bytes": 4624987,
+      "sha256": "8a2bd08c26a2ebe9be112386366cf8c1edd8d8649915b4d0afeb8ec819af0deb",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P014",
+      "filename": "14.jpg",
+      "bytes": 4307099,
+      "sha256": "16db3cbcb3b1807cbf2be499852b3e9b9c14e446af33f21ba6eae9f35c9577a7",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P015",
+      "filename": "15.jpg",
+      "bytes": 4458597,
+      "sha256": "78db84673e986f0162a1b8f794d68adc6f2e0d91d735f61faf873dc3a63aa46e",
+      "disposition": "Repository-only random notes",
+      "originalCommitted": false
+    },
+    {
+      "id": "P016",
+      "filename": "16.jpg",
+      "bytes": 4975314,
+      "sha256": "1f97049b21dc2dba128bea360cf4ca43b15e49464dc22c7833a7d6a91af30cf6",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P017",
+      "filename": "17.jpg",
+      "bytes": 4556109,
+      "sha256": "653117d80725fbae6136a97a2eff83140ba27564f9ca1a8af138b1c4df29a0f4",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P018",
+      "filename": "18.jpg",
+      "bytes": 5254085,
+      "sha256": "9295f85a9ee9687d2d828a6d933c271720945d98505cc5b4b900eebce0fb6a21",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P019",
+      "filename": "19.jpg",
+      "bytes": 4768237,
+      "sha256": "a8d72fc43df7dc0614101392d6b0f9f3070b5c31f2007bf5141bc8c0efa50d24",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P020",
+      "filename": "20.jpg",
+      "bytes": 5404076,
+      "sha256": "f1d72d26925e143388d8d09c2317eb4ffc4a95f5dcd4245c43ec7882e6866d28",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P021",
+      "filename": "21.jpg",
+      "bytes": 5025678,
+      "sha256": "4d19df77badae5d286a59bae9d9f1acf7a805388d12f156c103105b92122f9b7",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P022",
+      "filename": "22.jpg",
+      "bytes": 3936781,
+      "sha256": "645d3da3d2356459327c4441771a6f6b159e5993cfa84769e1fd3dc5fabefc99",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P023",
+      "filename": "23.jpg",
+      "bytes": 4306335,
+      "sha256": "6154f5b088a68607f06278f16e3782a393c926f04fd08283caf2f74fbbfdd5ab",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P024",
+      "filename": "24.jpg",
+      "bytes": 5427160,
+      "sha256": "2e4bb6c201714b5a876e2ad9d8b69d4e59be367eba539f83db990b3ce627852f",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P025",
+      "filename": "25.jpg",
+      "bytes": 4976302,
+      "sha256": "6e0324025386be6de3b8b87172cd583c4033ebeb00def932690ebc86bf95dc29",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P026",
+      "filename": "26.jpg",
+      "bytes": 4974936,
+      "sha256": "2e6b283246db8217aad8245536dec26fe6cde92a523edfd445f1726e490bd36c",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P027",
+      "filename": "27.jpg",
+      "bytes": 4406396,
+      "sha256": "6660ef5d151d3d14dd0ed3dc29924074d2adb8e3e34fd6070e0713409f5f7fb2",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P028",
+      "filename": "28.jpg",
+      "bytes": 4265895,
+      "sha256": "0f0da2112b77d997331ec042bd1e3c7761fc95bef89cdaee076b88085d37aa10",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P029",
+      "filename": "29.jpg",
+      "bytes": 5385187,
+      "sha256": "fd9c13714ecf49edf5e8aaaf31a8c3ed57897f25c794ab307618ecf667bfc291",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P030",
+      "filename": "30.jpg",
+      "bytes": 4940760,
+      "sha256": "49e3badb69414472329cfe91a58ab1c35bc88eb00ee19036c7074e4bd327eb96",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P031",
+      "filename": "31.jpg",
+      "bytes": 5496928,
+      "sha256": "5890feb89f6b914d9aa7e67db5c8ab787b94bef98edab477ec88441447a1b041",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P032",
+      "filename": "32.jpg",
+      "bytes": 5391233,
+      "sha256": "f68479120cf4985dab799a32ae520f190c2e9c4c6324be8881769fba59e9bde5",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P033",
+      "filename": "33.jpg",
+      "bytes": 4803047,
+      "sha256": "d32bfc3cc7b8714149f1a128cddadecfddac2f3c8abcb510af74802f52c4771b",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P034",
+      "filename": "34.jpg",
+      "bytes": 5065825,
+      "sha256": "49202747d1ee0b55023e27fabd9c94404e54738b9626969881fc779958a3eb22",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P035",
+      "filename": "35.jpg",
+      "bytes": 4591924,
+      "sha256": "b8ae2d41261c4197161f919536cf82742c7a5045a97acc8ff07341d3d911cceb",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P036",
+      "filename": "36.jpg",
+      "bytes": 4932720,
+      "sha256": "e6643a03a4208aec67485402e317847c6ecb4162472705433bff1b811a11546a",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P037",
+      "filename": "37.jpg",
+      "bytes": 4337209,
+      "sha256": "1c2efc0422c9ad410905a5c6f72ee13a719116d225ca52b57697fafc82160309",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P038",
+      "filename": "38.jpg",
+      "bytes": 5098526,
+      "sha256": "3813b1c4a0ed7d777b41622b2e6d20b7dc6fa9b2c76b8c96b5774b0b097d8149",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P039",
+      "filename": "39.jpg",
+      "bytes": 4579002,
+      "sha256": "02d63da4656c2b88bc8a9fdcedc490b7cb97e2031aa9f13dbdbb27a249b18002",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P040",
+      "filename": "40.jpg",
+      "bytes": 5734818,
+      "sha256": "33e2e92000f2408116c21c33cbf1f57da6a4caf245e97084088d239de0b8fbf3",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P041",
+      "filename": "41.jpg",
+      "bytes": 5083742,
+      "sha256": "ee0a382d4a19e08548ae3f29ee2dccb1871d3d6fd48b574be0da5985884ea9a0",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P042",
+      "filename": "42.jpg",
+      "bytes": 5027976,
+      "sha256": "d60448e4f6f57494a506994f7ae14289a1d70d914c9824a0bb54c5ee7e0f402a",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P043",
+      "filename": "43.jpg",
+      "bytes": 5271018,
+      "sha256": "f615115c596c1729f929b7a172a2fbd168291505a15406874b18b5034f54b9e4",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P044",
+      "filename": "44.jpg",
+      "bytes": 5550791,
+      "sha256": "da2aa61a02d38f87477ce6241c29d476d80567adf15f187295ca06c452e051a1",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P045",
+      "filename": "45.jpg",
+      "bytes": 4500021,
+      "sha256": "f36c420bd5e3328e2e38f600969d7b06cf1fbd2314d10aad2c6d00673a997335",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P046",
+      "filename": "46.jpg",
+      "bytes": 5408056,
+      "sha256": "616d9bb334739a9995b0a01e1abe46a58496f8683cbefcc489daa418f8320798",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P047",
+      "filename": "47.jpg",
+      "bytes": 5572112,
+      "sha256": "bd74b7bbe9085f93a151f056c54c1b0158c5a6b127b01926552afe6c528d0400",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "P048",
+      "filename": "48.jpg",
+      "bytes": 5349289,
+      "sha256": "5ad65ca7e1de03e379ea324c91091658456d1fe3d16f85ea961f7f0535eb0d24",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    },
+    {
+      "id": "T01",
+      "filename": "traveler_img.png",
+      "bytes": 1708382,
+      "sha256": "7cf2d470ea89f97f24357cfc26c142808b84d78820e409ba8784108150a6ef92",
+      "disposition": "Redacted operational reading transcription",
+      "originalCommitted": false
+    }
+  ]
+}

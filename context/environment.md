@@ -67,3 +67,18 @@ Reported names: `bmc`, `dry`, `fw`, `help`, `mac`, `sdr`, `sh`, `ssh`, `custom`,
 **All alias bodies, arguments, outputs, and side effects are currently unknown.** Even familiar names may wrap site-specific behavior. The teammate's existing collection remains the starting point and should retain attribution.
 
 The proposed troubleshooting sequence is: check BMC reachability, check power, check inventory, then continue with the locally established checks. The recollected command example was `ipmi wait <rack location>`, followed by references to `pwr` and `fru`. This is an unverified notation sample, not a runnable recipe. In particular, “check power” must distinguish reading power state from changing it.
+
+## 2026-09-13 note consolidation
+
+The initial account above remains a dated starting point. The [new reference map](../notes/reference.md) adds component/socket observations, interface and Traveler fields, test-preparation fragments, failure reasoning and handoff studies from 49 reviewed images. [Transcriptions](../notes/transcriptions.md) retain source order and uncertainty.
+
+New information is still **reported / unverified**. Important changes and conflicts:
+
+- An outdated SOP/error presentation was found (P018); the initial no-list description should not be treated as proof that no resource exists.
+- FLA/FLC functions, expansions and NH/NX mappings conflict across P043, P044 and P047.
+- INIT repetition, QT3 subgroups, Pass versus Run-In and the earlier QT2 mention remain unresolved.
+- Alias invocation examples and candidate script paths are now recorded, but **command bodies remain absent**. Conflicting clear syntax and evidence-retention questions block executable guidance.
+- The Traveler field map and additional stage rows broaden the operation view; neither row order nor the illustrated form establishes the official route.
+- Visual configuration clues, SSD restrictions, socket destinations and equipment readings remain scoped observations, not specifications.
+
+Use the [owner mailbox](../owner_mailbox/CLARIFICATION.md) for focused follow-up. Preserve old observations and add scoped corrections instead of silently replacing the source history.

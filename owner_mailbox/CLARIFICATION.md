@@ -1,0 +1,34 @@
+# Clarification mailbox
+
+These questions come from the 2026-09-13 image consolidation. Answer only what you can establish; an unanswered item remains unknown. Source numbers refer to [transcriptions](../notes/transcriptions.md). No credentials, employee identities or unit identifiers are needed in a reply.
+
+| ID | Question to ask conversationally | Best current interpretation / competing readings | Why it matters |
+| --- | --- | --- | --- |
+| C01 | Could you walk me through what FLA and FLC each do, and show which codes belong to them in the current suite? | P043 says Full load analysis / Full load cycle; P047 describes flashing / configuring. P044 assigns FLA NH and FLC NX, while P047 reverses them. No preferred code mapping is justified. | Prevent wrong stage selection and incorrect reference entries. |
+| C02 | When does INIT run, and how do QT1, QT3-1, QT3-2 and FINT fit together for a pass, fail or rerun? Does QT2 also exist? | P047 shows a single INIT but says it precedes each test. Initial context mentions QT2. The diagrams may describe different grouping levels. | Establish the actual routes and remaining work. |
+| C03 | What does Pass mean at this point, and which steps still remain before a unit is complete? | P037 and P039 may describe a QT3 pass before Run-In. RH01 versus RHO1 is uncertain. | Avoid confusing intermediate success with completion. |
+| C04 | Could you show me the approved setup sequence between choosing the unit and starting the test? | P031/P033 preserve steps 1–3 and 7–9; 4–6 are not recoverable. P020 is overlapped, P024/P029/P031/P047 are partly covered. | Reconstruct actual steps without inventing them. |
+| C05 | What exactly does the HMC clear shorthand do, when is it needed, and what evidence should already be saved? | P024/P030 show clear followed by location; P026 includes on. Syntax and retention are unresolved. | Separate observation from state change and preserve case evidence. |
+| C06 | Could we document a few alias definitions with their arguments, effects and example outputs? | Script locations appear in P023, but no bodies are supplied. P044 has sn/power where earlier material has sh/pwr. | Enable a command reference before any automated preflight. |
+| C07 | When a power error is shown but BMC cannot be reached, what checks distinguish the possible causes? | P036 suggests BMC health. Reachability alone cannot separate target, network, authentication, controller and unit-state issues. | Build an evidence-based investigation entry. |
+| C08 | Under what documented conditions would FBB be appropriate, and what tells us the result actually resolved the issue? | P032 proposes using topology to justify flashing. This remains an unsupported hypothesis. | Keep a learning idea from becoming a repair rule. |
+| C09 | Which Bianca cases need NvDebug evidence, and where should the next team find it? | P018/P022 imply evidence-related ordering delays; absent evidence and hard-to-find evidence may be different causes. | Improve handoff clarity and avoid repeated collection. |
+| C10 | Could we trace the three confusing sidebands on an intact unit and identify both endpoints? | P040 mentions broken training sockets. P042 sketches marks without complete paths. Backplane 1→PSB differs from earlier generalized IPEX notes. | Create a trustworthy component map. |
+| C11 | Which side is side 0 in these descriptions, and from which viewing direction are left and right defined? | Pages use physical clues and one explicit from-the-back view. TMP may be TPM; front control plane may mean panel. | Prevent mirrored or mislabeled diagrams. |
+| C12 | Which model/configuration does each SSD and port-count rule apply to, and what record confirms it? | P027, P028 and P037 may describe different test setups. Gaines 3.0 A1 versus engineering remains unresolved. | Keep visual clues within their actual scope. |
+| C13 | Who can place or release each hold or Move tag, and what should happen while we are waiting for one? | P038 explicitly leaves pre-tag handling unknown. P046 contains Do Not Move, Do Not Touch and 5 Strike labels. | Make handoff boundaries explicit. |
+| C14 | After a move, which records need updating, and which one owns the destination? | Team Assignments, Test Tracker, ServiceMe and Fusion Eye all appear; their ownership differs or is unclear. Clearing a location is distinct from clearing HMC logs. | Prevent mismatched location and stale status. |
+| C15 | Could you explain the Traveler's rows and who completes each one? | P048 and T01 show Inspection, Pre scan, Diagnostic, Repair, Leak test, Refill, TIM curing, QC and OBA. Form row order may not equal required process order. | Understand stage ownership and evidence placement. |
+| C16 | Are the CDU numbers simply observed readings, or where would I find the approved limits and alarm procedure? | P043 records 149–150 kPa and about 24 °C. Treat these as observations only. ETF is not expanded. | Avoid mistaking a note for an equipment specification. |
+| C17 | What do HMC, PSB, KVM, TSC, ETF and the less familiar form labels mean in this environment? | HMC and PSB expansions are early recollections; P041 says KVM kernel while P020 says keyboard/video/mouse. FAE is later expanded as Failure Analysis Engineering. | Keep local terminology accurate without guessing from familiar abbreviations. |
+| C18 | Can you clarify the short notes about HMC unplugging, serial-number issues and no tests after 12? | P046 does not supply sufficient context or a clear time suffix. No operational interpretation is selected. | Prevent compressed fragments from being followed literally. |
+| C19 | Where is the current error/SOP reference, and who maintains it? | P018 moves from no error list to an outdated SOP presentation being found. | Improve retrieval and currency before creating a duplicate. |
+| C20 | Can we check the exact error spellings shown in the Traveler examples against a non-identifying reference? | P048 contains partially legible partner test suffixes and FBVDDP_1; they are not confirmed code definitions. | Avoid seeding an error catalog with transcription mistakes. |
+
+## Suggested first conversation
+
+Start with C01–C05 for testing accuracy, C10–C12 for the component map, or C13–C15 for handoff clarity. A useful answer identifies its configuration/stage, gives a concrete non-identifying example, points to the applicable source and says which exceptions remain.
+
+## How to record a resolution
+
+Keep the original reading transcription intact. Add the confirmed wording, source/revision, applicable model and stage, review date, and remaining exceptions to the editorial layer. Use a role or fictional attribution instead of an employee identity. Mark a claim locally confirmed only after supporting evidence is supplied; an AI rewrite alone does not confirm it.

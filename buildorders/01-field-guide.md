@@ -1,6 +1,8 @@
 # BO-01 — Rigline Field Guide
 
-Status: proposed; a personal study outline can begin now. Initial user: green jacket.
+Status: personal study prototype implemented; local facts still unverified. Initial user: green jacket.
+
+The [field notebook](../notes/README.md) now provides a sourced narrative, searchable topic reference and explicit unknowns from the 2026-09-13 image intake. This completes an initial learning and retrieval layer, not a verified training authority. The next gate is resolving one [clarification](../owner_mailbox/CLARIFICATION.md) against an applicable source and trying the guide on a repeat learning question.
 
 ## Purpose
 

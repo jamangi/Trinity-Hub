@@ -1,0 +1,425 @@
+[
+  {
+    "n": 1,
+    "title": "First, learn what is in the unit",
+    "bullets": [
+      "The first task is recognition: put a name to each board, cable, fan and cooling component.",
+      "The notebook begins with PCIe, PSB, BMC, PDB, backplanes and the interposer. Knowing the names gives later questions somewhere to attach.",
+      "Some labels and expansions are still provisional. A familiar abbreviation is not yet an understood function."
+    ]
+  },
+  {
+    "n": 2,
+    "title": "A name needs a location",
+    "bullets": [
+      "A component list becomes more useful when I can find each item in the chassis.",
+      "Cold plates, the M.2 area and the busbar assembly join the map. Unit labels provide context, but their identifying values do not belong in this reference.",
+      "A cable diagram is the next missing piece: what connects to what, and where does each route begin?"
+    ]
+  },
+  {
+    "n": 3,
+    "title": "Build a visual vocabulary",
+    "bullets": [
+      "Learn the component name, its location and the model of the unit together.",
+      "A labeled image could help connect a word to a physical region. That learning aid would need checked labels.",
+      "The ambition is complete assembly knowledge. The immediate work is smaller: identify one part correctly and explain where it belongs."
+    ]
+  },
+  {
+    "n": 4,
+    "title": "The two sides are not identical",
+    "bullets": [
+      "The notes distinguish the M.2 side from the side with HMC, TPM and a battery.",
+      "Colors and socket labels are useful recognition clues, provided the model and viewing direction are recorded.",
+      "An estimated unit value appears in the source. It is an unattributed impression, not a verified price."
+    ]
+  },
+  {
+    "n": 5,
+    "title": "From objects to connections",
+    "bullets": [
+      "The next question is no longer only what a part looks like, but which connections it owns.",
+      "The HMC-to-interposer cords and the manifold-to-cold-plate hoses are early examples.",
+      "Descriptions should include size, color, ports, side and position. These details make a memory checkable."
+    ]
+  },
+  {
+    "n": 6,
+    "title": "Trace a route before memorizing it",
+    "bullets": [
+      "The hose notes distinguish short and long runs, with crossing routes for the longer hoses.",
+      "Fiber connections around CX7/CX8 and OSFP introduce another kind of path to trace.",
+      "These are observations from an unspecified configuration. They need a confirmed viewpoint and model before becoming a diagram someone could assemble from."
+    ]
+  },
+  {
+    "n": 7,
+    "title": "Ask what a board replacement includes",
+    "bullets": [
+      "Replacing a motherboard raises a larger question: which sockets and attached parts must be accounted for?",
+      "The sketch places two GPUs above a central CPU on a Bianca board.",
+      "That picture is a memory aid. It does not yet explain the electrical topology or define a replacement procedure."
+    ]
+  },
+  {
+    "n": 8,
+    "title": "Mechanical detail has its own precision",
+    "bullets": [
+      "The busbar notes attempt to capture tool choice, fastening order and its relation to the PDB.",
+      "The sequence and tool setting are compressed and incomplete. They cannot stand in for specified torque and a reviewed procedure.",
+      "Useful next evidence would identify the exact assembly, fasteners, tool specification and source revision."
+    ]
+  },
+  {
+    "n": 9,
+    "title": "Small connections deserve names too",
+    "bullets": [
+      "The notes turn to fan numbering, IPEX placement and sideband routes.",
+      "Fan order and cable destinations are easier to remember as a checked map than as isolated facts.",
+      "The reported reinstall order remains unverified; counting and naming must come before procedural confidence."
+    ]
+  },
+  {
+    "n": 10,
+    "title": "Give memory more than one index",
+    "bullets": [
+      "A component can be recognized in place, by its socket, or in isolation.",
+      "The author groups cards by shape and size, then revises the counts. The corrections are part of learning.",
+      "A useful inventory should let these different recognition methods lead to the same component entry."
+    ]
+  },
+  {
+    "n": 11,
+    "title": "Compare both motherboard sides",
+    "bullets": [
+      "The NIC, M.2 area, front panel and smaller control card become distinct entries.",
+      "Socket lists expose the asymmetry between side 0 and side 1.",
+      "Connector appearance alone does not establish its protocol. The front-panel port names still need checking."
+    ]
+  },
+  {
+    "n": 12,
+    "title": "Inventory the things between the boards",
+    "bullets": [
+      "Cards are only part of the unit: sockets, cables and mechanical pieces also need a place in the inventory.",
+      "The notes propose a checklist and printed references to make omissions visible.",
+      "IPEX socket counts begin a more detailed description, but some destinations remain blank."
+    ]
+  },
+  {
+    "n": 13,
+    "title": "Count the sockets, then name the destinations",
+    "bullets": [
+      "The interposer is recorded as having four slots, three used, with BMC and HMC connections.",
+      "M.2, NIC and front-panel notes add cable counts and destinations.",
+      "A crossed-out heading makes one attribution uncertain. Keep that uncertainty attached to the entry until the part is checked."
+    ]
+  },
+  {
+    "n": 14,
+    "title": "Finish the smaller connection notes",
+    "bullets": [
+      "Backplane and TPM observations extend the inventory.",
+      "The backplane notes distinguish the front SSD connections from rear cabling.",
+      "A short cable without a destination is still an unanswered question, not a connection to be filled in from intuition."
+    ]
+  },
+  {
+    "n": 16,
+    "title": "The unit enters a larger environment",
+    "bullets": [
+      "Racking adds rails, location labels, Ethernet connections and loopbacks to the picture.",
+      "Cable colors and port availability appear to depend on the configuration.",
+      "Partner Diagnostic and its logs enter the notebook, expanding the subject from assembly to testing evidence."
+    ]
+  },
+  {
+    "n": 17,
+    "title": "Learn the work around the test",
+    "bullets": [
+      "Successful work includes records, handoffs, handling arrangements, configuration checks and knowing what evidence a replacement needs.",
+      "ServiceMe, the Traveler and spreadsheets each appear in the workflow.",
+      "The notes are a learning checklist. They do not yet specify every role, prerequisite or acceptance criterion."
+    ]
+  },
+  {
+    "n": 18,
+    "title": "Notice where knowledge costs time",
+    "bullets": [
+      "The author first experiences the error reference as missing, then discovers an outdated SOP presentation.",
+      "That changes the problem: findability, currency and usefulness may matter as much as whether a document exists.",
+      "Other reported friction includes weak isolation, unclear FRU baselines, repeated tracking and delays around curing or refill."
+    ]
+  },
+  {
+    "n": 19,
+    "title": "Separate family from configuration",
+    "bullets": [
+      "Gaines version names are refined into configuration labels and Traveler-color clues.",
+      "Rack roles also appear, though one abbreviation is uncertain at this point.",
+      "These are useful working observations. The authoritative configuration still needs a source beyond color or visual resemblance."
+    ]
+  },
+  {
+    "n": 20,
+    "title": "Begin to outline test preparation",
+    "bullets": [
+      "The notes connect scanning, BMC contact, power, inventory, ticket state and Fusion Eye setup.",
+      "An overlapping image interrupts the numbered sequence and introduces KVM-related notes.",
+      "The overall aim is visible, but the missing steps prevent treating this page as a complete start-test recipe."
+    ]
+  },
+  {
+    "n": 21,
+    "title": "Ask what a test changes",
+    "bullets": [
+      "Knowing a stage name is not enough. What state does it change, what does it inspect, and what counts as success?",
+      "Firmware values appear linked to ServiceMe in the author's current explanation.",
+      "Each configuration needs its own expected inventory and settings; those baselines have not yet been supplied."
+    ]
+  },
+  {
+    "n": 22,
+    "title": "Evidence must travel with the case",
+    "bullets": [
+      "Missing NvDebug evidence is reported as an obstacle to some Bianca orders.",
+      "The author also notices the cost of losing track of waiting work and repeated full tests.",
+      "A physical unit must be matched to its own record before acting. A part number alone may describe a type rather than uniquely identify a unit."
+    ]
+  },
+  {
+    "n": 23,
+    "title": "Find where the shorthand lives",
+    "bullets": [
+      "The notes identify likely script locations and use directory listing as a way to investigate them.",
+      "This is progress toward documenting the teammate's aliases, but it does not reveal their implementations.",
+      "Traveler updates and the receive–diagnose–scan–rack sequence remain active questions."
+    ]
+  },
+  {
+    "n": 24,
+    "title": "A preparation sequence still has gaps",
+    "bullets": [
+      "The page adds scan data, a log-clear example and a possible boot-menu path.",
+      "The bottom is covered, and the command syntax differs from another page.",
+      "Clearing history affects evidence. Its exact purpose, timing and retention requirements need confirmation."
+    ]
+  },
+  {
+    "n": 25,
+    "title": "Learn the ticket fields as a system",
+    "bullets": [
+      "The ServiceMe sketch distinguishes finding a record from changing its stage, bin, result, reason and comment.",
+      "A useful update needs the correct unit and the intended transition.",
+      "Field spellings and option values are still reports from the notebook; they should be checked against the current form."
+    ]
+  },
+  {
+    "n": 26,
+    "title": "Distinguish observations from actions",
+    "bullets": [
+      "A command list mixes inventory and console access with power-on and log-clearing examples.",
+      "Those commands do not all have the same effects, even when the shorthand looks uniform.",
+      "A note that some FRU dummy values are acceptable needs an exact, configuration-specific exception before it can guide a decision."
+    ]
+  },
+  {
+    "n": 27,
+    "title": "Record the questions that appear at the screen",
+    "bullets": [
+      "The author notices an unfamiliar two-window interaction and asks what each window represents.",
+      "An SSD generation rule is also recorded without its full scope.",
+      "These small ambiguities are worth resolving before they become habits."
+    ]
+  },
+  {
+    "n": 28,
+    "title": "Use visual clues carefully",
+    "bullets": [
+      "Handles, port counts and SSD-slot observations offer ways to recognize configurations.",
+      "The notes contain several exceptions, which makes a single visual shortcut fragile.",
+      "Use these clues to ask a better question, then confirm the configuration against the appropriate record."
+    ]
+  },
+  {
+    "n": 29,
+    "title": "A ticket update needs an exact transition",
+    "bullets": [
+      "The page narrows the ServiceMe sequence to starting QT1 or QT3 work.",
+      "The reason field mentions QT1 or prescan even while the broader note covers QT3.",
+      "That mismatch and the covered lower text need clarification before the sequence can be shortened into a task card."
+    ]
+  },
+  {
+    "n": 30,
+    "title": "Moving a unit moves its context",
+    "bullets": [
+      "The notes connect failed-test records, log clearing, physical moves and Fusion Eye location data.",
+      "Copying location values is described, but the complete move procedure is absent.",
+      "The important learning question is which records and states must remain consistent across the move."
+    ]
+  },
+  {
+    "n": 31,
+    "title": "Choose a test using the case history",
+    "bullets": [
+      "The author begins using ServiceMe comments, replaced parts and Fusion Eye history to understand QT3 work.",
+      "QT1 is described with a different default path.",
+      "The numbered start-test sequence skips steps that are not recoverable from the supplied image."
+    ]
+  },
+  {
+    "n": 32,
+    "title": "A connection suggests a question, not a verdict",
+    "bullets": [
+      "Component topology becomes a way to think about why a test might fail.",
+      "The source proposes a BIOS-flash response to a CX8-related error and to Bianca replacement.",
+      "That is the author's hypothesis. A physical connection does not establish that flashing is needed, nor does flashing prove that a cause has been ruled out."
+    ]
+  },
+  {
+    "n": 33,
+    "title": "Starting the test is not the last step",
+    "bullets": [
+      "The surviving continuation checks arguments and unit information, starts the test, observes Fusion Eye and updates tracking.",
+      "The setup story now includes monitoring and recordkeeping.",
+      "The missing middle of the procedure remains missing; later steps do not validate an incomplete sequence."
+    ]
+  },
+  {
+    "n": 34,
+    "title": "Read the failure in more than one place",
+    "bullets": [
+      "A Fusion Eye failure label is followed by checking the current unit state and available event evidence.",
+      "Power status, HMC events and sensors can answer different questions.",
+      "Current state and historical events must be compared by time. A unit that powers on now may still have failed earlier."
+    ]
+  },
+  {
+    "n": 35,
+    "title": "Make the failure understandable to the next team",
+    "bullets": [
+      "ServiceMe comments are intended to carry the failure code and useful context.",
+      "The notes also identify a role that can provide a Move tag.",
+      "The handoff should distinguish what was observed, what is inferred and what has actually been authorized."
+    ]
+  },
+  {
+    "n": 36,
+    "title": "Do not let the headline become the diagnosis",
+    "bullets": [
+      "A power-failure label may be followed by a command that cannot reach BMC.",
+      "The author recognizes the danger of repeating the label as though it already explained the fault.",
+      "A reachability problem opens several possibilities. It does not, by itself, prove a bad BMC or a healthy power path."
+    ]
+  },
+  {
+    "n": 37,
+    "title": "Passing still needs a defined meaning",
+    "bullets": [
+      "The notes describe a Pass result, reason, destination bin and comment format.",
+      "The relationship between this pass and any remaining Run-In work is not yet clear.",
+      "An SSD compatibility statement appears again, with a more specific Gaines version but still without a verified applicability source."
+    ]
+  },
+  {
+    "n": 38,
+    "title": "Connect setup with failure handoff",
+    "bullets": [
+      "The setup outline joins scanning, tracking, racking and ServiceMe.",
+      "The failure path adds a Move tag, clearing a Fusion Eye location and choosing a Diagnostic destination.",
+      "The author explicitly does not yet know what to do before the Move tag. That boundary should remain visible."
+    ]
+  },
+  {
+    "n": 39,
+    "title": "The pass path has its own handoff",
+    "bullets": [
+      "The source lists Traveler updates, removal of test accessories, blanks, Run-In records and clearing the test location.",
+      "Unusual units are a reason to consult history and a lead.",
+      "The sequence needs confirmation of stage, shutdown, handling and ownership before it can serve as a practical procedure."
+    ]
+  },
+  {
+    "n": 40,
+    "title": "Return to the hardware with sharper questions",
+    "bullets": [
+      "The later socket notes identify power, leak sensing, sidebands, optics and HMC-related positions.",
+      "Three confusing sideband cables receive special attention because damaged training sockets make them hard to trace.",
+      "A training unit can teach an incorrect connection if its damage is not recorded. Missing and broken parts need explicit labels."
+    ]
+  },
+  {
+    "n": 41,
+    "title": "Refine the second side and the vocabulary",
+    "bullets": [
+      "Bianca 1 socket notes add PCIe, M.2, power and C-Link observations.",
+      "FAE is expanded in the notebook, while KVM and Gaines 3.0 are described differently than before.",
+      "Later wording is more detailed, but detail alone does not settle a contradiction."
+    ]
+  },
+  {
+    "n": 42,
+    "title": "Map the power and sideband questions",
+    "bullets": [
+      "The power list attempts to account for ten connections, with BF3 counted twice.",
+      "Backplane 0 and backplane 1 are now described with different cable destinations.",
+      "The notes explicitly assume a PDB connection for the power list. The reference should preserve that assumption rather than draw it as a verified route."
+    ]
+  },
+  {
+    "n": 43,
+    "title": "Widen the view to the test infrastructure",
+    "bullets": [
+      "The rack sketch adds cooling infrastructure, cable placement, label changes and Diagnostic responsibilities.",
+      "FLA and FLC receive expansions that differ from the later functional account.",
+      "Cooling readings and test durations are observations. They are not operating thresholds, specifications or scheduling guarantees."
+    ]
+  },
+  {
+    "n": 44,
+    "title": "See the interface as a set of inputs",
+    "bullets": [
+      "The Fusion Eye sketch lists identity fields, configuration, mode, stage and component arguments.",
+      "The author notices that a test may accept incorrect values, making input validation an important question.",
+      "The alias inventory grows, but names and interface fields still need verified meanings and implementations."
+    ]
+  },
+  {
+    "n": 45,
+    "title": "Learn the shape of the workspace",
+    "bullets": [
+      "A mostly blank Fusion Eye Home sketch records two expandable groups.",
+      "It is useful as evidence of what the author was learning to navigate.",
+      "The group labels are uncertain; the empty drawing is not evidence of missing application functionality."
+    ]
+  },
+  {
+    "n": 46,
+    "title": "Status, location and holds are different signals",
+    "bullets": [
+      "The fuller interface sketch includes filters, statuses, rack columns and unit cards.",
+      "Some cards carry hold messages such as Do Not Move or Do Not Touch.",
+      "A visible status should not be treated as permission. Hold ownership and release criteria are still unknown."
+    ]
+  },
+  {
+    "n": 47,
+    "title": "Build a first model of the test sequence",
+    "bullets": [
+      "The notes arrange INIT, FLA, FLC, PreTest, IST, FCT and FINT into a larger sequence.",
+      "The functional account describes inventory checks, firmware flashing and configuration, with rough time estimates.",
+      "The FLA/FLC codes are reversed relative to an earlier page. The order, code mapping and rerun rules still need a trusted source."
+    ]
+  },
+  {
+    "n": 48,
+    "title": "The Traveler connects the whole repair story",
+    "bullets": [
+      "The form gathers identity, reported failure, repair notes and stage-by-stage outcomes.",
+      "Its examples show that a unit can accumulate observations and actions across multiple teams.",
+      "A useful history preserves the distinction between a symptom, an action and evidence that the action resolved the problem."
+    ]
+  }
+]
