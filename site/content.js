@@ -1317,7 +1317,9 @@ window.TRINITY_NOTES = {
       ],
       "updates": [
         "U02",
-        "U07"
+        "U07",
+        "U08",
+        "U09"
       ],
       "text": "The repair path can stall before a Bianca order when required NvDebug evidence is missing. The owner reports that some technicians omit the step and that the affected units are difficult to find in ServiceMe. The immediate opportunity is to make the evidence gap visible while someone can still act on it.",
       "reasoning": "Two delays may compound: the check is not completed, and the omission is discovered only when an order is attempted. A report can reduce discovery time; it cannot by itself fix unclear responsibility, unavailable equipment or an unacceptable evidence package.",
@@ -1330,17 +1332,18 @@ window.TRINITY_NOTES = {
       "report": [
         "Coverage: active units/tickets in scope, histories retrieved, retrieval failures, snapshot time and report age.",
         "Counts: unique Bianca mentions, NvDebug mentions, union, intersection, and reviewer-confirmed open evidence gaps; count units separately from tickets if they are not one-to-one.",
-        "Per candidate: ticket number, service tag, OC mac (meaning unresolved), current stage, match term, worklog time, short excerpt, evidence reference, review state and next action.",
+        "Per candidate: ticket number; unit service number/service-tag field (exact mapping and stability to confirm); current OS MAC as secondary context with source and observation time; current stage, match term, worklog time, short excerpt, evidence reference, review state and next action.",
         "Full worklogs only if the reviewer needs them and the workplace permits the report location. Real identifiers and worklogs stay in workplace systems; public examples are synthetic."
       ],
       "assumptions": [
         "A permitted export, search view or interface can enumerate the current stage and read complete histories. An API is not assumed.",
         "No matching text means no matching text found in the retrieved scope, not that NvDebug was never performed.",
-        "A completed historical run may belong to an earlier repair episode; matching the current requirement needs a local rule."
+        "A completed historical run may belong to an earlier repair episode; matching the current requirement needs a local rule.",
+        "OS MAC may change after NIC replacement according to the owner's local account. Do not use it alone to deduplicate physical units or join their repair history. A printed MAC may be stale before the label is refreshed; the service number is a candidate for a more durable key, not yet a verified one."
       ],
       "questions": [
         "What makes NvDebug evidence acceptable for a Bianca order, and when must it be repeated?",
-        "Which field defines current stage, and where are the logs or attachments stored? What exactly is OC mac?"
+        "Which field defines current stage, and where are the logs or attachments stored? Which service-number field identifies the physical unit across handoffs and NIC replacements?"
       ],
       "measure": "Measure time from evidence becoming required to discovery of its absence, then to acceptable evidence and order readiness. Separately measure candidate precision and missed gaps using a manual sample. Count orders unblocked, without claiming the entire subsequent repair time as saved.",
       "pilot": "Green-jacket personal review of a small permitted sample first. A broad recurring report needs a workflow owner and agreed access. Keep query rules and spelling variants maintained; shrink or stop the report if reviewers mostly dismiss stale matches.",
@@ -1397,7 +1400,9 @@ window.TRINITY_NOTES = {
         46
       ],
       "updates": [
-        "U04"
+        "U04",
+        "U08",
+        "U09"
       ],
       "text": "Unplugging the wrong unit can interrupt someone else's test and create restart, investigation or record-reconciliation work. This is a target-selection problem even if the unplugging procedure itself is familiar.",
       "reasoning": "Rack position, ticket identity and the physical unit can drift apart after moves. A confident location label is insufficient if the unit was relocated or the instruction was misunderstood. Prevention is most useful immediately before the physical action.",
@@ -1405,7 +1410,8 @@ window.TRINITY_NOTES = {
         "Use the existing physical-action procedure to verify the intended unit against a unique identifier at its current location and the current task or move instruction.",
         "A small scan-and-compare aid could display intended identity, observed identity, current recorded location, test state and holds together. Stop the comparison on mismatch, stale data or missing identity; it should not label an ambiguous match safe.",
         "If available, show a timestamped change warning when a location recently changed occupants. Do not assume a part number uniquely identifies a unit.",
-        "Investigate confusing cable labels or handoff wording from actual near misses before adding a new software layer."
+        "Investigate confusing cable labels or handoff wording from actual near misses before adding a new software layer.",
+        "Include label freshness in the identity check after a NIC replacement: the printed OS MAC may describe the previous NIC. Prefer a confirmed stable unit identifier for continuity; an OS MAC discrepancy calls for reconciliation, not an automatic conclusion that it is a different unit."
       ],
       "report": [
         "Intended and observed unit match, source/time of location mapping, current test/hold information and reason for any mismatch.",
@@ -1417,7 +1423,8 @@ window.TRINITY_NOTES = {
       ],
       "questions": [
         "Which identity check is currently required just before disconnection?",
-        "How are recent moves and holds reflected in the system used by the person unplugging the unit?"
+        "How are recent moves and holds reflected in the system used by the person unplugging the unit?",
+        "Which label field is the service number, and how is a NIC replacement followed by label reprinting and verification?"
       ],
       "measure": "Count wrong-unit interruptions and caught mismatches relative to physical moves, plus time added per verification. Include avoided restarts only when the counterfactual is supportable.",
       "pilot": "Try a personal confirmation card first, then an offline comparison using synthetic identities. Maintain the mapping source; stop live reliance if location data cannot be kept current.",
@@ -1644,14 +1651,17 @@ window.TRINITY_NOTES = {
         46
       ],
       "updates": [
-        "U06"
+        "U06",
+        "U08",
+        "U09"
       ],
       "text": "ServiceMe, Fusion Eye, the Traveler and trackers represent different aspects of the same unit. A read-only comparison could expose cases where a physical move or stage change did not reach every record, improving both handoffs and target selection.",
       "reasoning": "More reporting helps only if it reconciles existing sources rather than becoming another unowned truth. Disagreement should identify the two claims and their times; the report should not choose whichever system was queried last.",
       "improvements": [
         "Define the authoritative source for identity, location, test state, process stage and holds; these may have different owners.",
         "Join records through a stable permitted identity and retain retrieval times. Flag missing joins, multiple active locations and contradictory stage/location claims.",
-        "Allow the normal update delay to be reviewed before treating a discrepancy as actionable. Send a candidate to the existing record owner; do not overwrite systems automatically."
+        "Allow the normal update delay to be reviewed before treating a discrepancy as actionable. Send a candidate to the existing record owner; do not overwrite systems automatically.",
+        "Keep current and historical OS MAC observations associated with the confirmed unit identity and their observation/change times. A changed MAC after NIC replacement should not split one unit's history into two units; flag uncertain associations instead of merging them automatically."
       ],
       "report": [
         "Unit association within the workplace, each conflicting claim and source/time, last move/change when available, review state and owning role."
@@ -1661,7 +1671,8 @@ window.TRINITY_NOTES = {
       ],
       "questions": [
         "Which source owns each field, and how long does an ordinary move take to appear everywhere?",
-        "What distinguishes multiple valid records from a duplicate or stale location?"
+        "What distinguishes multiple valid records from a duplicate or stale location?",
+        "Does the service number remain stable across the relevant repairs, and which records must change when the NIC and label change?"
       ],
       "measure": "Count reviewed stale records corrected and related wrong-location interruptions, while tracking temporary disagreements dismissed.",
       "pilot": "Compare one handoff manually, then a small saved-data snapshot. Keep join and ownership rules current; stop if unresolved identity collisions dominate.",
@@ -2251,8 +2262,18 @@ window.TRINITY_NOTES = {
     },
     {
       "id": "U07",
-      "text": "The proposed NvDebug report fields include ticket number, service tag, OC mac and possibly worklogs. OC mac is retained exactly as supplied; it has not been identified as OS MAC or another address field.",
-      "status": "Owner-proposed report fields; one field name remains ambiguous"
+      "text": "The proposed NvDebug report fields include ticket number, service tag, OS MAC and possibly worklogs. The owner corrected the original typo to OS MAC and intended it to help associate a ticket with the physical unit. Its suitability as a lasting unit identifier is reconsidered in U08–U09.",
+      "status": "Owner-corrected report field name; intended use clarified"
+    },
+    {
+      "id": "U08",
+      "status": "Owner-reported NIC and label behavior; local mechanism not independently verified",
+      "text": "The owner's current understanding is that the NIC determines the unit's OS MAC. The label includes OS MAC, BMC MAC and a service number. Replacing the NIC changes the OS MAC and requires the label to be reprinted. This records the local account, not a universal rule about MAC behavior."
+    },
+    {
+      "id": "U09",
+      "status": "Owner hypothesis about durable identity; proposed report distinction",
+      "text": "Because a NIC replacement can change OS MAC, the owner questions its usefulness for identifying a unit across unknown handoffs and suggests the service number may survive them better. Treat OS MAC as secondary, time-qualified information. Confirm what service number means, how it maps to service tag or serial-number fields, and whether it remains stable before using it as the durable unit key. Ticket identity and physical-unit identity remain separate."
     }
   ],
   "traveler": {

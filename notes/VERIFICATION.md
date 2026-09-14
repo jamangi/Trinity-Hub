@@ -54,3 +54,9 @@ The owner clarified the purpose of Analysis after the first release. The revisio
 JavaScript syntax checks for scripts/build-notes.mjs, site/app.js and site/content.js passed (exit 0). The test suite passed 20/20 with no failures (exit 0), including operations content, owner provenance, search and bookmark migration. Local Markdown link checks passed. The earlier browser checks above apply to the first release; this revision was checked through source validation and automated route tests, not a new visual browser pass.
 
 Changed files: README.md; context/environment.md; notes/README.md; notes/VERIFICATION.md; notes/analysis.json; notes/analysis.md; notes/introspection.json; notes/introspection.md; notes/owner-updates.json; owner_mailbox/CLARIFICATION.md; scripts/build-notes.mjs; site/README.md; site/index.html; site/app.js; site/content.js; site/styles.css; tests/notes-site.test.mjs. No workplace scripts, integrations or scans were implemented or run. Remaining dependencies are recorded in the mailbox and each proposal.
+
+## OS MAC owner clarification
+
+Corrected the report field to OS MAC; recorded the owner-reported NIC/label behavior and the tentative service-number identity preference. C21 is resolved for wording and purpose; C29–C30 retain the unresolved field mapping, stability and label-update workflow. Analysis entries OP01, OP03 and OP09 now distinguish changeable MAC observations from durable unit identity. Original Notes and Introspection content were not edited.
+
+The generator and generated JavaScript syntax check passed (exit 0). The existing test suite passed 20/20 (exit 0), including the updated OS MAC search check. No additional tests or browser pass were needed for this content correction. Changed files: context/environment.md; notes/README.md; notes/VERIFICATION.md; notes/owner-updates.json; notes/analysis.json; notes/analysis.md; owner_mailbox/CLARIFICATION.md; site/content.js; tests/notes-site.test.mjs.

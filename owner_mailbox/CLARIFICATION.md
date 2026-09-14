@@ -62,15 +62,23 @@ Not knowing what FRU data should look like means lacking an expected baseline wh
 
 Access to servers being tested is through a server on the test-rack network. A proposed script could check every rack location and report locations without a ping reply. Similar non-disruptive reports could improve visibility across the workload even without a previously recorded pain point.
 
-### U07 — Owner-proposed report fields; one field name remains ambiguous
+### U07 — Owner-corrected report field name; intended use clarified
 
-The proposed NvDebug report fields include ticket number, service tag, OC mac and possibly worklogs. OC mac is retained exactly as supplied; it has not been identified as OS MAC or another address field.
+The proposed NvDebug report fields include ticket number, service tag, OS MAC and possibly worklogs. The owner corrected the original typo to OS MAC and intended it to help associate a ticket with the physical unit. Its suitability as a lasting unit identifier is reconsidered in U08–U09.
+
+### U08 — Owner-reported NIC and label behavior; local mechanism not independently verified
+
+The owner's current understanding is that the NIC determines the unit's OS MAC. The label includes OS MAC, BMC MAC and a service number. Replacing the NIC changes the OS MAC and requires the label to be reprinted. This records the local account, not a universal rule about MAC behavior.
+
+### U09 — Owner hypothesis about durable identity; proposed report distinction
+
+Because a NIC replacement can change OS MAC, the owner questions its usefulness for identifying a unit across unknown handoffs and suggests the service number may survive them better. Treat OS MAC as secondary, time-qualified information. Confirm what service number means, how it maps to service tag or serial-number fields, and whether it remains stable before using it as the durable unit key. Ticket identity and physical-unit identity remain separate.
 
 ## Further questions raised by the clarification
 
 | ID | Focused question | Current interpretation / recommendation | Benefit |
 | --- | --- | --- | --- |
-| C21 | What does OC mac mean in the proposed report, and which field supplies it? | Retain OC mac exactly; it could refer to OS MAC or another field, but neither is assumed. | Join and identify candidates using the intended field. |
+| C21 — Resolved: wording and purpose | What did the originally written “OC mac” mean? | Owner corrected the typo to OS MAC, intended as a physical-unit identification aid. NIC/label behavior is recorded in U08. Field sourcing, durable identity and label updates are now tracked in C29–C30. | Remove the field-name ambiguity without assuming MAC permanence. |
 | C22 | How can we enumerate current Diagnostic, Repair and Testing tickets and read all their worklogs and attachments through an available permitted view or export? | No ServiceMe API is assumed. Record stage source, pagination, inaccessible histories and refresh time. | Make report coverage and counts trustworthy. |
 | C23 | Which worklog wording or evidence artifact distinguishes NvDebug required, planned, completed, missing and no longer relevant to this repair episode? | Keywords find review candidates; no mention does not prove the check was omitted. Use reviewer-confirmed evidence gaps as a separate count. | Reduce false positives and avoid missing cases with different wording. |
 | C24 | What begins and ends refill waiting, what delay is expected, and what commonly blocks the next action? | Keep refill separate from curing; do not infer age from the last comment or label every long wait avoidable. | Find the actual reason units spend days there. |
@@ -78,6 +86,13 @@ The proposed NvDebug report fields include ticket number, service tag, OC mac an
 | C26 | For one configuration, what should the fru output contain and which placeholders, optional components or absent entries are acceptable? | Owner clarified that the pain is the expected BMC component-identification baseline. Wrapper coverage and valid exceptions remain unknown. | Make FRU interpretation faster and more consistent. |
 | C27 | What exact identity and current-state checks precede unplugging, and where could the wrong-unit mismatch be caught? | Start from the existing physical-action procedure and a unique identity; a part number or location alone may not be enough. | Prevent interruption of another unit’s test. |
 | C28 | Which workload exceptions have a responsible role able to take the next action, and where should that outcome be recorded? | Begin with an on-demand personal digest of existing sources, not a second ticket system or automatic assignments. | Turn holistic visibility into useful action rather than another unattended list. |
+
+## Remaining identity and label questions
+
+| ID | Focused question | Current interpretation / recommendation | Benefit |
+| --- | --- | --- | --- |
+| C29 | Is the label's service number the Service Tag, unit serial number, or a different field, and does it stay unchanged through the repairs and handoffs we need to track? | The owner suggests it may be more durable than OS MAC. Prefer a confirmed stable unit key, but do not equate these field names or claim permanence yet. Ticket numbers identify records and need a separate association with physical units. | Keep a unit's history together even when its NIC changes. |
+| C30 | After NIC replacement, which source provides the current OS MAC, who reprints and checks the label, and which ServiceMe/Fusion Eye records need updating? | Owner reports that replacement requires reprinting the label with OS MAC, BMC MAC and service number. Keep current versus historical MACs distinguishable by source/time; do not assume the label is already current. | Prevent stale-label mismatches and broken ticket-to-unit associations. |
 
 ## Direction for subsequent Analysis entries
 

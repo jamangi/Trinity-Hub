@@ -23,7 +23,7 @@ Two delays may compound: the check is not completed, and the omission is discove
 
 - Coverage: active units/tickets in scope, histories retrieved, retrieval failures, snapshot time and report age.
 - Counts: unique Bianca mentions, NvDebug mentions, union, intersection, and reviewer-confirmed open evidence gaps; count units separately from tickets if they are not one-to-one.
-- Per candidate: ticket number, service tag, OC mac (meaning unresolved), current stage, match term, worklog time, short excerpt, evidence reference, review state and next action.
+- Per candidate: ticket number; unit service number/service-tag field (exact mapping and stability to confirm); current OS MAC as secondary context with source and observation time; current stage, match term, worklog time, short excerpt, evidence reference, review state and next action.
 - Full worklogs only if the reviewer needs them and the workplace permits the report location. Real identifiers and worklogs stay in workplace systems; public examples are synthetic.
 
 ### Assumptions and limits
@@ -31,11 +31,12 @@ Two delays may compound: the check is not completed, and the omission is discove
 - A permitted export, search view or interface can enumerate the current stage and read complete histories. An API is not assumed.
 - No matching text means no matching text found in the retrieved scope, not that NvDebug was never performed.
 - A completed historical run may belong to an earlier repair episode; matching the current requirement needs a local rule.
+- OS MAC may change after NIC replacement according to the owner's local account. Do not use it alone to deduplicate physical units or join their repair history. A printed MAC may be stale before the label is refreshed; the service number is a candidate for a more durable key, not yet a verified one.
 
 ### Open questions
 
 - What makes NvDebug evidence acceptable for a Bianca order, and when must it be repeated?
-- Which field defines current stage, and where are the logs or attachments stored? What exactly is OC mac?
+- Which field defines current stage, and where are the logs or attachments stored? Which service-number field identifies the physical unit across handoffs and NIC replacements?
 
 ### Evidence of benefit
 
@@ -53,7 +54,11 @@ Sources: [P018](transcriptions.md#p018), [P022](transcriptions.md#p022).
 
 **Owner clarification U02:** Some technicians omit NvDebug on Bianca cases. The owner reports this is a necessary step for ordering Biancas, and that finding units needing it in ServiceMe is difficult. A proposed report would search worklogs for units currently in Diagnostic, Repair or Testing for Bianca/NvDebug mentions, with counts and identifying fields available only inside the workplace.
 
-**Owner clarification U07:** The proposed NvDebug report fields include ticket number, service tag, OC mac and possibly worklogs. OC mac is retained exactly as supplied; it has not been identified as OS MAC or another address field.
+**Owner clarification U07:** The proposed NvDebug report fields include ticket number, service tag, OS MAC and possibly worklogs. The owner corrected the original typo to OS MAC and intended it to help associate a ticket with the physical unit. Its suitability as a lasting unit identifier is reconsidered in U08–U09.
+
+**Owner clarification U08:** The owner's current understanding is that the NIC determines the unit's OS MAC. The label includes OS MAC, BMC MAC and a service number. Replacing the NIC changes the OS MAC and requires the label to be reprinted. This records the local account, not a universal rule about MAC behavior.
+
+**Owner clarification U09:** Because a NIC replacement can change OS MAC, the owner questions its usefulness for identifying a unit across unknown handoffs and suggests the service number may survive them better. Treat OS MAC as secondary, time-qualified information. Confirm what service number means, how it maps to service tag or serial-number fields, and whether it remains stable before using it as the durable unit key. Ticket identity and physical-unit identity remain separate.
 
 <a id="op02"></a>
 
@@ -119,6 +124,7 @@ Rack position, ticket identity and the physical unit can drift apart after moves
 - A small scan-and-compare aid could display intended identity, observed identity, current recorded location, test state and holds together. Stop the comparison on mismatch, stale data or missing identity; it should not label an ambiguous match safe.
 - If available, show a timestamped change warning when a location recently changed occupants. Do not assume a part number uniquely identifies a unit.
 - Investigate confusing cable labels or handoff wording from actual near misses before adding a new software layer.
+- Include label freshness in the identity check after a NIC replacement: the printed OS MAC may describe the previous NIC. Prefer a confirmed stable unit identifier for continuity; an OS MAC discrepancy calls for reconciliation, not an automatic conclusion that it is a different unit.
 
 ### What the report or aid would show
 
@@ -134,6 +140,7 @@ Rack position, ticket identity and the physical unit can drift apart after moves
 
 - Which identity check is currently required just before disconnection?
 - How are recent moves and holds reflected in the system used by the person unplugging the unit?
+- Which label field is the service number, and how is a NIC replacement followed by label reprinting and verification?
 
 ### Evidence of benefit
 
@@ -150,6 +157,10 @@ Next useful step: Describe a non-identifying near miss from instruction to physi
 Sources: [P022](transcriptions.md#p022), [P030](transcriptions.md#p030), [P038](transcriptions.md#p038), [P046](transcriptions.md#p046).
 
 **Owner clarification U04:** Unplugging the wrong racked unit, weak SOPs and insufficient isolation before ordering replacement parts are reported operational pain points.
+
+**Owner clarification U08:** The owner's current understanding is that the NIC determines the unit's OS MAC. The label includes OS MAC, BMC MAC and a service number. Replacing the NIC changes the OS MAC and requires the label to be reprinted. This records the local account, not a universal rule about MAC behavior.
+
+**Owner clarification U09:** Because a NIC replacement can change OS MAC, the owner questions its usefulness for identifying a unit across unknown handoffs and suggests the service number may survive them better. Treat OS MAC as secondary, time-qualified information. Confirm what service number means, how it maps to service tag or serial-number fields, and whether it remains stable before using it as the durable unit key. Ticket identity and physical-unit identity remain separate.
 
 <a id="op04"></a>
 
@@ -407,6 +418,7 @@ More reporting helps only if it reconciles existing sources rather than becoming
 - Define the authoritative source for identity, location, test state, process stage and holds; these may have different owners.
 - Join records through a stable permitted identity and retain retrieval times. Flag missing joins, multiple active locations and contradictory stage/location claims.
 - Allow the normal update delay to be reviewed before treating a discrepancy as actionable. Send a candidate to the existing record owner; do not overwrite systems automatically.
+- Keep current and historical OS MAC observations associated with the confirmed unit identity and their observation/change times. A changed MAC after NIC replacement should not split one unit's history into two units; flag uncertain associations instead of merging them automatically.
 
 ### What the report or aid would show
 
@@ -420,6 +432,7 @@ More reporting helps only if it reconciles existing sources rather than becoming
 
 - Which source owns each field, and how long does an ordinary move take to appear everywhere?
 - What distinguishes multiple valid records from a duplicate or stale location?
+- Does the service number remain stable across the relevant repairs, and which records must change when the NIC and label change?
 
 ### Evidence of benefit
 
@@ -436,6 +449,10 @@ Next useful step: Map one unit's identity, stage, location and hold fields acros
 Sources: [P017](transcriptions.md#p017), [P025](transcriptions.md#p025), [P030](transcriptions.md#p030), [P033](transcriptions.md#p033), [P038](transcriptions.md#p038), [P039](transcriptions.md#p039), [P046](transcriptions.md#p046).
 
 **Owner clarification U06:** Access to servers being tested is through a server on the test-rack network. A proposed script could check every rack location and report locations without a ping reply. Similar non-disruptive reports could improve visibility across the workload even without a previously recorded pain point.
+
+**Owner clarification U08:** The owner's current understanding is that the NIC determines the unit's OS MAC. The label includes OS MAC, BMC MAC and a service number. Replacing the NIC changes the OS MAC and requires the label to be reprinted. This records the local account, not a universal rule about MAC behavior.
+
+**Owner clarification U09:** Because a NIC replacement can change OS MAC, the owner questions its usefulness for identifying a unit across unknown handoffs and suggests the service number may survive them better. Treat OS MAC as secondary, time-qualified information. Confirm what service number means, how it maps to service tag or serial-number fields, and whether it remains stable before using it as the durable unit key. Ticket identity and physical-unit identity remain separate.
 
 <a id="op10"></a>
 

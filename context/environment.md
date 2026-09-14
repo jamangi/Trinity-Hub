@@ -89,3 +89,10 @@ Use the [owner mailbox](../owner_mailbox/CLARIFICATION.md) for focused follow-up
 The owner clarified that NvDebug is required for Bianca orders, some technicians omit it, and locating affected cases in ServiceMe is difficult. Refill delays of days, wrong-unit unplugging, weak SOPs and loose isolation before parts orders are reported pains. FRU ambiguity means lacking an expected component-identification baseline for the BMC fru check.
 
 The owner also describes access through a server on the test-rack network and proposes workload-wide observational reports. Exact targets, command behavior, non-interference and data access remain unverified. See [U01–U07 and C21–C28](../owner_mailbox/CLARIFICATION.md) for provenance and open details, and [operations Analysis](../notes/analysis.md) for proposed relief. These clarifications refine the working context without rewriting the historical Notes pages.
+
+
+## OS MAC and identity clarification
+
+The owner corrected the report-field typo to **OS MAC**. Their current understanding is that the NIC determines OS MAC, that the printed label also carries BMC MAC and a service number, and that a NIC replacement changes OS MAC and requires label reprinting. This is **owner-reported local behavior**, not independently verified command or hardware behavior.
+
+For proposed reports, retain OS MAC as secondary context with source and observation time. It should not be the sole key joining a unit's repair history across NIC replacements. The service number is the owner's candidate for a more durable identifier; its exact relationship to Service Tag or serial number and its stability remain unconfirmed. Keep ticket identity separate from physical-unit identity. See [U07–U09, resolved C21 and new C29–C30](../owner_mailbox/CLARIFICATION.md). Original photo transcriptions remain unchanged.

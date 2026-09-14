@@ -15,7 +15,7 @@ Start with the [chronological reading edition](narrative.md), [reference map and
 - Transcription flags are editorial. Narrative bullets are revised learning prose. Reference cards are a synthesis. Analysis entries are explicitly interpretations, questions, hypotheses or proposals.
 - Later notes do not automatically override earlier ones. The FLA/FLC definitions and reversed codes, clear-command syntax, backplane routes and stage/Run-In questions remain visible.
 
-The [owner mailbox](../owner_mailbox/CLARIFICATION.md) retains the original questions, records seven owner clarifications, and adds C21–C28 for the operations proposals. C09 is partially resolved.
+The [owner mailbox](../owner_mailbox/CLARIFICATION.md) retains the original questions, records nine owner clarifications, and tracks C21–C30 for the operations proposals. C09 is partially resolved; C21's field-name ambiguity is resolved as OS MAC. C29–C30 address durable unit identity and label updates.
 
 ## Content and presentation
 

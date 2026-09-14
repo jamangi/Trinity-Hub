@@ -101,7 +101,7 @@ test("operations analysis covers pain points and structural opportunities with t
  const a=app();
  assert.ok(a.route("#analysis").includes("Company operations"));
  assert.ok(a.route("#analysis/Evidence%20readiness/OP01").includes("Find Bianca cases"));
- assert.ok(a.search("OC mac").includes("#analysis/"));
+ assert.ok(a.search("OS MAC").includes("#analysis/"));
  assert.ok(a.search("refill queue").includes("#analysis/"));
  assert.ok(a.search("probe error").includes("#analysis/"));
  a.search("");
